@@ -11,7 +11,8 @@ public class CameraControl : MonoBehaviour
     private Camera m_Camera;                        
     private float m_ZoomSpeed;                      
     private Vector3 m_MoveVelocity;                 
-    private Vector3 m_DesiredPosition;              
+    private Vector3 m_DesiredPosition;
+    private Vector3 m_AdjustEuler;
 
 
     private void Awake()
@@ -32,10 +33,41 @@ public class CameraControl : MonoBehaviour
         FindAveragePosition();
 
         transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
+        
+
+
     }
 
 
+
     private void FindAveragePosition()
+    {
+        Vector3 averagePos = new Vector3();
+        Vector3 adjustEuler = new Vector3();
+        int numTargets = 0;
+
+        for (int i = 0; i < m_Targets.Length; i++)
+        {
+            if (!m_Targets[i].gameObject.activeSelf)
+                continue;
+
+            averagePos += m_Targets[i].position;
+            numTargets++;
+        }
+
+        if (numTargets > 0)
+            averagePos /= numTargets;
+
+        averagePos.y = transform.position.y;
+
+        adjustEuler = transform.eulerAngles;
+
+        m_DesiredPosition = averagePos;
+        m_AdjustEuler = adjustEuler;
+    }
+
+
+    private void FindAveragePosition2()
     {
         Vector3 averagePos = new Vector3();
         int numTargets = 0;
@@ -102,3 +134,4 @@ public class CameraControl : MonoBehaviour
         m_Camera.orthographicSize = FindRequiredSize();
     }
 }
+
