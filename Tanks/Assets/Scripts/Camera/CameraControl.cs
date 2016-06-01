@@ -8,6 +8,7 @@ public class CameraControl : MonoBehaviour
     [HideInInspector] public Transform[] m_Targets;
 
 
+    private Transform m_Player;
     private Camera m_Camera;                        
     private float m_ZoomSpeed;                      
     private Vector3 m_MoveVelocity;                 
@@ -24,7 +25,7 @@ public class CameraControl : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        Zoom();
+        //Zoom();
     }
 
 
@@ -32,6 +33,7 @@ public class CameraControl : MonoBehaviour
     {
         FindAveragePosition();
         transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
+        transform.eulerAngles = m_AdjustEuler + new Vector3(20f, 0f, 0f);
     }
 
     
@@ -57,8 +59,8 @@ public class CameraControl : MonoBehaviour
 
         adjustEuler = transform.eulerAngles;
 
-        m_DesiredPosition = averagePos;
-        m_AdjustEuler = adjustEuler;
+        m_DesiredPosition = m_Targets[0].position;
+        m_AdjustEuler = m_Targets[0].eulerAngles;
     }
 
 
@@ -126,6 +128,6 @@ public class CameraControl : MonoBehaviour
 
         transform.position = m_DesiredPosition;
 
-        m_Camera.orthographicSize = FindRequiredSize();
+        //m_Camera.orthographicSize = FindRequiredSize();
     }
 }
