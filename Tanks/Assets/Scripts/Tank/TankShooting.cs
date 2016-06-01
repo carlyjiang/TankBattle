@@ -65,6 +65,11 @@ public class TankShooting : MonoBehaviour
         {
             Fire();
         }
+        else if (Input.GetKeyDown(m_PlayerNumber == 1 ? KeyCode.Q : KeyCode.L))
+        {
+            GameObject field = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            field.transform.position = m_FireTransform.position + new Vector3(0, 1, 0);
+        }
     }
 
 
