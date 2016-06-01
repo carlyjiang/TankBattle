@@ -33,7 +33,7 @@ public class CameraControl : MonoBehaviour
     {
         FindAveragePosition();
         transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
-        transform.eulerAngles = m_AdjustEuler + new Vector3(20f, 0f, 0f);
+        transform.eulerAngles = m_AdjustEuler + new Vector3(30f, 0f, 0f);
     }
 
     
@@ -127,6 +127,7 @@ public class CameraControl : MonoBehaviour
         FindAveragePosition();
 
         transform.position = m_DesiredPosition;
+        
 
         //m_Camera.orthographicSize = FindRequiredSize();
     }
