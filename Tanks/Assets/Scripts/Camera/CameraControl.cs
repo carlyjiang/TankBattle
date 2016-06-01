@@ -31,15 +31,10 @@ public class CameraControl : MonoBehaviour
     private void Move()
     {
         FindAveragePosition();
-
         transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
-        
-
-
     }
 
-
-
+    
     private void FindAveragePosition()
     {
         Vector3 averagePos = new Vector3();
@@ -134,4 +129,3 @@ public class CameraControl : MonoBehaviour
         m_Camera.orthographicSize = FindRequiredSize();
     }
 }
-
