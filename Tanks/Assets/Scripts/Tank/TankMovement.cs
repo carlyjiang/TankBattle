@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 public class TankMovement : MonoBehaviour
 {
@@ -93,7 +94,7 @@ public class TankMovement : MonoBehaviour
     private void Move()
     {
         // Adjust the position of the tank based on the player's input.
-        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
+        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * TimeScale() * Time.deltaTime;
         m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
     }
 
@@ -101,8 +102,12 @@ public class TankMovement : MonoBehaviour
     private void Turn()
     {
         // Adjust the rotation of the tank based on the player's input.
-        float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
+        float turn = m_TurnInputValue * m_TurnSpeed * TimeScale() * Time.deltaTime;
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
         m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
+    }
+
+    private float TimeScale() {
+        return TankShooting.m_FieldPositions.Any() ? System.Math.Min(1, TankShooting.m_FieldPositions.Min(v => Vector3.Distance(m_Rigidbody.position, v)) / 20) : 1;
     }
 }
