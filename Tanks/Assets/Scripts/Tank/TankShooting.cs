@@ -5,6 +5,7 @@ public class TankShooting : MonoBehaviour
 {
     public int m_PlayerNumber = 1;              // Used to identify the different players.
     public Rigidbody m_Shell;                   // Prefab of the shell.
+    public GameObject m_Field;
     public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
     public Slider m_AimSlider;                  // A child of the tank that displays the current launch force.
     public AudioSource m_ShootingAudio;         // Reference to the audio source used to play the shooting audio. NB: different to the movement audio source.
@@ -67,8 +68,7 @@ public class TankShooting : MonoBehaviour
         }
         else if (Input.GetKeyDown(m_PlayerNumber == 1 ? KeyCode.Q : KeyCode.L))
         {
-            GameObject field = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            field.transform.position = m_FireTransform.position + new Vector3(0, 1, 0);
+            Instantiate(m_Field, m_FireTransform.position + new Vector3(0, 1, 0), m_FireTransform.rotation);
         }
     }
 
