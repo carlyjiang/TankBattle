@@ -52,7 +52,6 @@ public class TankHealth : MonoBehaviour
         // Adjust the value and colour of the slider.
         m_Slider.value = m_CurrentHealth;
         m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
-        
     }
 
 
@@ -67,4 +66,3 @@ public class TankHealth : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
-
