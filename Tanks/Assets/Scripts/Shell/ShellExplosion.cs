@@ -2,7 +2,7 @@
 
 public class ShellExplosion : MonoBehaviour
 {
-    public LayerMask m_TankMask;
+    
     public ParticleSystem m_ExplosionParticles;       
     public AudioSource m_ExplosionAudio;              
     public float m_MaxDamage = 100f;                  
@@ -20,7 +20,7 @@ public class ShellExplosion : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Find all the tanks in an area around the shell and damage them.
-        Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius, m_TankMask);
+        Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
 
         for (int i = 0; i < collider.Length; i++)
         {
@@ -34,15 +34,19 @@ public class ShellExplosion : MonoBehaviour
             targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);
 
             TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
+			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
+			if (targetHealth) 
+			{
+				float damege = CalculateDamage(targetRigidbody.position);
+				targetHealth.TakeDamage(damege);	
+			}
+			if (oilhealth) 
+			{
+				//float damege = CalculateDamage(targetRigidbody.position);
+				oilhealth.TakeDamage(1);
+			}
 
-            if (!targetHealth)
-            {
-                continue;
-            }
-
-            float damege = CalculateDamage(targetRigidbody.position);
-            targetHealth.TakeDamage(damege);
-
+            
         }
 
         // Unparent the particles from the shell.
