@@ -20,6 +20,7 @@ public class ShellExplosion : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Find all the tanks in an area around the shell and damage them.
+		
         Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius, m_TankMask);
 
         for (int i = 0; i < collider.Length; i++)
@@ -44,6 +45,7 @@ public class ShellExplosion : MonoBehaviour
             targetHealth.TakeDamage(damege);
 
         }
+		
 
         // Unparent the particles from the shell.
         m_ExplosionParticles.transform.parent = null;
@@ -52,10 +54,12 @@ public class ShellExplosion : MonoBehaviour
         m_ExplosionParticles.Play();
 
         // Play the explosion sound effect.
-        m_ExplosionAudio.Play();
+        //m_ExplosionAudio.Play();
+
 
         // Once the particles have finished, destroy the gameobject they are on.
-        Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+        //Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+		Destroy(m_ExplosionParticles.gameObject, 2f);
 
         // Destroy the shell.
         Destroy(gameObject);
