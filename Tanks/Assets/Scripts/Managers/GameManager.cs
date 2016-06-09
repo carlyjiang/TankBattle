@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
 
         SpawnAllTanks();
 
-
 		SpawnEnemy ();
         SetCameraTargets();
 
@@ -40,10 +39,12 @@ public class GameManager : MonoBehaviour
 
     private void SpawnAllTanks()
     {
-		
+
+        Debug.Log("Tanks " + m_Tanks.Length);
         // For all the tanks...
         for (int i = 0; i < m_Tanks.Length; i++)
         {
+
             // ... create them, set their player number and references needed for control.
             m_Tanks[i].m_Instance =
                 Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
@@ -185,7 +186,7 @@ public class GameManager : MonoBehaviour
         }
 
         // If there are one or fewer tanks remaining return true, otherwise return false.
-        return numTanksLeft <= 1;
+        return false;
     }
 
 

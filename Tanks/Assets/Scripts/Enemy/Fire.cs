@@ -40,8 +40,6 @@ public class Fire : MonoBehaviour {
 			if (!isFired && Time.time > nextFire ) {
 				nextFire = Time.time + fireRate;
 				Fight ();
-
-
 			}
 		}
 	}
