@@ -1,0 +1,30 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 05.04.2016 00:51:14
+
+mtllib Stylized_Tileable_Stone.mtl
+
+#
+# object Tileable_Stone
+#
+
+v  -39.3701 0.0000 39.3701
+v  39.3701 0.0000 39.3701
+v  39.3701 0.0000 -39.3701
+v  -39.3701 0.0000 -39.3701
+# 4 vertices
+
+vn 0.0000 1.0000 -0.0000
+# 1 vertex normals
+
+vt 0.9878 0.0149 0.0000
+vt 0.9878 0.9849 0.0000
+vt 0.0178 0.9849 0.0000
+vt 0.0178 0.0149 0.0000
+# 4 texture coords
+
+g Tileable_Stone
+usemtl default
+s 1
+f 1/1/1 2/2/1 3/3/1 4/4/1 
+# 1 polygons
+

@@ -6,10 +6,12 @@ public class OilStorageHealth : MonoBehaviour {
 	// Use this for initialization
 	public float m_StartingHealth = 1f;
 	public GameObject m_ExplosionPrefab;
+	public float m_ExplosionForce = 1000f;
+	public float m_ExplosionRadius = 5f;  
 	private ParticleSystem m_ExplosionParticles;   
 	private bool m_Dead;          
 	private float m_CurrentHealth;  
-	private AudioSource m_ExplosionAudio;  
+	//private AudioSource m_ExplosionAudio;  
 
 
 	private void Awake()
@@ -46,6 +48,56 @@ public class OilStorageHealth : MonoBehaviour {
 		m_ExplosionParticles.Play();
 		//m_ExplosionAudio.Play();
 		gameObject.SetActive(false);
+		OnTriggerEnter ();
+	}
+
+	private void OnTriggerEnter()
+	{
+		// Find all the items in an area around the shell and damage them.
+		Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
+
+		for (int i = 0; i < collider.Length; i++)
+		{
+			Rigidbody targetRigidbody = collider[i].GetComponent<Rigidbody>();
+
+			if(!targetRigidbody)
+			{
+				continue;
+			}
+
+			targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);
+
+			TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
+			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
+			if (targetHealth) 
+			{
+				
+				targetHealth.TakeDamage(1);	
+			}
+			if (oilhealth) 
+			{
+				//float damege = CalculateDamage(targetRigidbody.position);
+				oilhealth.TakeDamage(1);
+			}
+
+
+		}
+
+		// Unparent the particles from the shell.
+		m_ExplosionParticles.transform.parent = null;
+
+		// Play the particle system.
+		m_ExplosionParticles.Play();
+
+		// Play the explosion sound effect.
+		//m_ExplosionAudio.Play();
+
+		// Once the particles have finished, destroy the gameobject they are on.
+		Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+
+		// Destroy the shell.
+		Destroy(gameObject);
+
 	}
 
 }
