@@ -3,8 +3,15 @@ guid: ac6f60f12976bea47a4b5158d3c0283b
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
+    100000: stone
+    100002: //RootNode
+    400000: stone
+    400002: //RootNode
+    2300000: stone
+    3300000: stone
     4300000: stone-uvlayout
     4300002: stone
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 3
