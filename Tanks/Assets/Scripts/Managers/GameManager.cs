@@ -39,12 +39,9 @@ public class GameManager : MonoBehaviour
 
     private void SpawnAllTanks()
     {
-
-        Debug.Log("Tanks " + m_Tanks.Length);
         // For all the tanks...
         for (int i = 0; i < m_Tanks.Length; i++)
         {
-
             // ... create them, set their player number and references needed for control.
             m_Tanks[i].m_Instance =
                 Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
@@ -52,7 +49,6 @@ public class GameManager : MonoBehaviour
             m_Tanks[i].m_PlayerNumber = i + 1;
             m_Tanks[i].Setup();
         }
-
     }
 
 	private void SpawnEnemy()
@@ -60,8 +56,6 @@ public class GameManager : MonoBehaviour
 		Vector3 ve = new Vector3 (10F, 0, 0);
 		Instantiate (Enemy, ve, Quaternion.identity);
 	}
-
-
 
     private void SetCameraTargets()
     {
@@ -78,7 +72,6 @@ public class GameManager : MonoBehaviour
         // These are the targets the camera should follow.
         m_CameraControl.m_Targets = targets;
     }
-
 
     // This is called from start and will run each phase of the game one after another.
     private IEnumerator GameLoop()
@@ -106,7 +99,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private IEnumerator RoundStarting()
     {
         // As soon as the round starts reset the tanks and make sure they can't move.
@@ -124,7 +116,6 @@ public class GameManager : MonoBehaviour
         yield return m_StartWait;
     }
 
-
     private IEnumerator RoundPlaying()
     {
         // As soon as the round begins playing let the players control the tanks.
@@ -139,10 +130,7 @@ public class GameManager : MonoBehaviour
             // ... return on the next frame.
             yield return null;
         }
-
-//		Coroutine
     }
-
 
     private IEnumerator RoundEnding()
     {
@@ -277,4 +265,3 @@ public class GameManager : MonoBehaviour
         }
     }
 }
-
