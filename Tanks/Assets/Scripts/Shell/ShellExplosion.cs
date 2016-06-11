@@ -2,7 +2,7 @@
 
 public class ShellExplosion : MonoBehaviour
 {
-    public LayerMask m_TankMask;
+    
     public ParticleSystem m_ExplosionParticles;       
     public AudioSource m_ExplosionAudio;              
     public float m_MaxDamage = 100f;                  
@@ -19,8 +19,10 @@ public class ShellExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Find all the tanks in an area around the shell and damage them.
-        Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius, m_TankMask);
+
+        // Find all the tanks in an area around the shell and damage them.		
+        Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
+
 
         for (int i = 0; i < collider.Length; i++)
         {
@@ -34,16 +36,21 @@ public class ShellExplosion : MonoBehaviour
             targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);
 
             TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
+			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
+			if (targetHealth) 
+			{
+				float damege = CalculateDamage(targetRigidbody.position);
+				targetHealth.TakeDamage(damege);	
+			}
+			if (oilhealth) 
+			{
+				//float damege = CalculateDamage(targetRigidbody.position);
+				oilhealth.TakeDamage(1);
+			}
 
-            if (!targetHealth)
-            {
-                continue;
-            }
-
-            float damege = CalculateDamage(targetRigidbody.position);
-            targetHealth.TakeDamage(damege);
-
+            
         }
+		
 
         // Unparent the particles from the shell.
         m_ExplosionParticles.transform.parent = null;
@@ -52,10 +59,12 @@ public class ShellExplosion : MonoBehaviour
         m_ExplosionParticles.Play();
 
         // Play the explosion sound effect.
-        m_ExplosionAudio.Play();
+        //m_ExplosionAudio.Play();
+
 
         // Once the particles have finished, destroy the gameobject they are on.
-        Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+        //Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+		Destroy(m_ExplosionParticles.gameObject, 2f);
 
         // Destroy the shell.
         Destroy(gameObject);
@@ -63,7 +72,7 @@ public class ShellExplosion : MonoBehaviour
     }
 
 
-    private float CalculateDamage(Vector3 targetPosition)
+    public float CalculateDamage(Vector3 targetPosition)
     {
         // Calculate the amount of damage a target should take based on it's position.
 

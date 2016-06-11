@@ -5,12 +5,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
-    public float m_StartDelay = 3f;             // The delay between the start of RoundStarting and RoundPlaying phases.
-    public float m_EndDelay = 3f;               // The delay between the end of RoundPlaying and RoundEnding phases.
+    public float m_StartDelay = 1f;             // The delay between the start of RoundStarting and RoundPlaying phases.
+    public float m_EndDelay = 1f;               // The delay between the end of RoundPlaying and RoundEnding phases.
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
     public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
+	public GameObject Enemy;
 
 
     private int m_RoundNumber;                  // Which round the game is currently on.
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         SpawnAllTanks();
+
+		SpawnEnemy ();
         SetCameraTargets();
 
         // Once the tanks have been created and the camera is using them as targets, start the game.
@@ -42,11 +45,17 @@ public class GameManager : MonoBehaviour
             // ... create them, set their player number and references needed for control.
             m_Tanks[i].m_Instance =
                 Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
+		
             m_Tanks[i].m_PlayerNumber = i + 1;
             m_Tanks[i].Setup();
         }
     }
 
+	private void SpawnEnemy()
+	{
+		Vector3 ve = new Vector3 (10F, 0, 0);
+		Instantiate (Enemy, ve, Quaternion.identity);
+	}
 
     private void SetCameraTargets()
     {
@@ -63,7 +72,6 @@ public class GameManager : MonoBehaviour
         // These are the targets the camera should follow.
         m_CameraControl.m_Targets = targets;
     }
-
 
     // This is called from start and will run each phase of the game one after another.
     private IEnumerator GameLoop()
@@ -91,7 +99,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private IEnumerator RoundStarting()
     {
         // As soon as the round starts reset the tanks and make sure they can't move.
@@ -103,12 +110,11 @@ public class GameManager : MonoBehaviour
 
         // Increment the round number and display text showing the players what round it is.
         m_RoundNumber++;
-        m_MessageText.text = "ROUND " + m_RoundNumber;
+        m_MessageText.text = "Game Begins";
 
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_StartWait;
     }
-
 
     private IEnumerator RoundPlaying()
     {
@@ -125,7 +131,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
     }
-
 
     private IEnumerator RoundEnding()
     {
@@ -169,7 +174,7 @@ public class GameManager : MonoBehaviour
         }
 
         // If there are one or fewer tanks remaining return true, otherwise return false.
-        return numTanksLeft <= 1;
+        return false;
     }
 
 

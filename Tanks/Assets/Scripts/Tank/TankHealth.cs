@@ -9,6 +9,8 @@ public class TankHealth : MonoBehaviour
     public Color m_FullHealthColor = Color.green;  
     public Color m_ZeroHealthColor = Color.red;    
     public GameObject m_ExplosionPrefab;
+
+    private Slider m_MySlider;
     
     private AudioSource m_ExplosionAudio;          
     private ParticleSystem m_ExplosionParticles;   
@@ -20,6 +22,17 @@ public class TankHealth : MonoBehaviour
         m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
 
+        if (gameObject.tag == "Player")
+            m_MySlider = GameObject.FindGameObjectWithTag("HealthSlider").GetComponent<Slider>();
+
+        if (m_MySlider)
+        {
+            Debug.Log("Find Component");
+        }
+        else
+        {
+            Debug.Log("Do not Find Component");
+        }
         m_ExplosionParticles.gameObject.SetActive(false);
     }
 
@@ -50,12 +63,18 @@ public class TankHealth : MonoBehaviour
     private void SetHealthUI()
     {
         // Adjust the value and colour of the slider.
-        m_Slider.value = m_CurrentHealth;
-        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
         
+        if (gameObject.tag == "Player")
+        {
+            m_MySlider.value = m_CurrentHealth;
+        }
+        else
+        {
+            m_Slider.value = m_CurrentHealth;
+            m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
+        }
     }
-
-
+    
     private void OnDeath()
     {
         // Play the effects for the death of the tank and deactivate it.
@@ -67,4 +86,3 @@ public class TankHealth : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
-

@@ -32,8 +32,9 @@ public class CameraControl : MonoBehaviour
     private void Move()
     {
         FindAveragePosition();
-        transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
-        transform.eulerAngles = m_AdjustEuler + new Vector3(30f, 0f, 0f);
+        //transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
+        transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, 0f);
+        transform.eulerAngles = m_AdjustEuler + new Vector3(10f, 0f, 0f);
     }
 
     
