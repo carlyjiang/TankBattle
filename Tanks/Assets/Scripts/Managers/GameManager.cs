@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
-    public float m_StartDelay = 1f;             // The delay between the start of RoundStarting and RoundPlaying phases.
-    public float m_EndDelay = 1f;               // The delay between the end of RoundPlaying and RoundEnding phases.
+    public float m_StartDelay = 0.2f;             // The delay between the start of RoundStarting and RoundPlaying phases.
+    public float m_EndDelay = 0.2f;               // The delay between the end of RoundPlaying and RoundEnding phases.
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
         {
             // ... create them, set their player number and references needed for control.
             m_Tanks[i].m_Instance =
-                Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
+                Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, 
+                m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
 		
             m_Tanks[i].m_PlayerNumber = i + 1;
             m_Tanks[i].Setup();

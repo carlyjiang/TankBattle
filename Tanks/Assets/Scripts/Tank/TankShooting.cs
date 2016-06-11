@@ -25,6 +25,8 @@ public class TankShooting : MonoBehaviour
     private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
     private Vector3 m_AimCrossOriginalPositionOffset;
 
+    private ShootButton shootButton;
+
 
     private void OnEnable()
     {
@@ -42,9 +44,8 @@ public class TankShooting : MonoBehaviour
     private void Start()
     {
         m_FireButton = "Fire" + m_PlayerNumber;
-
         m_ChargeSpeed = (m_MaxLaunchForce - m_MinLaunchForce) / m_MaxChargeTime;
-        
+        shootButton = GameObject.FindGameObjectWithTag("ShootButton").GetComponent<ShootButton>();
     }
 
 
@@ -59,7 +60,7 @@ public class TankShooting : MonoBehaviour
             m_CurrentLaunchForce = m_MaxLaunchForce;
             Fire();
         }
-        else if (Input.GetButtonDown(m_FireButton))
+        else if (Input.GetButtonDown(m_FireButton) || shootButton.isKeyDown())
         {
             m_Fired = false;
             m_CurrentLaunchForce = m_MinLaunchForce;
@@ -67,19 +68,17 @@ public class TankShooting : MonoBehaviour
             m_ShootingAudio.clip = m_ChargingClip;
             m_ShootingAudio.Play();
         }
-        else if (Input.GetButton(m_FireButton) && !m_Fired)
+        else if ((Input.GetButton(m_FireButton) || shootButton.IsPressing()) && !m_Fired)
         {
             m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
 
             //m_AimSlider.value = m_CurrentLaunchForce;
             m_AimCross.gameObject.transform.position += new Vector3(0f, 0.04f * (m_CurrentLaunchForce - m_MinLaunchForce), 0f);
         }
-        
-        else if (Input.GetButtonUp(m_FireButton) && !m_Fired)
+        else if ((Input.GetButtonUp(m_FireButton) || shootButton.isKeyUp()) && !m_Fired)
         {
             Fire();
         }
-
         else if (Input.GetKeyDown(m_PlayerNumber == 1 ? KeyCode.Q : KeyCode.L))
         {
             // Create time manipulation field

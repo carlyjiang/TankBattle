@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - HealthSlider
+  - VirtualStick
+  - ShootButton
   layers:
   - Default
   - TransparentFX
