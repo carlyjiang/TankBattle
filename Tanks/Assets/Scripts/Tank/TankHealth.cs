@@ -25,6 +25,7 @@ public class TankHealth : MonoBehaviour
         if (gameObject.tag == "Player")
             m_MySlider = GameObject.FindGameObjectWithTag("HealthSlider").GetComponent<Slider>();
 
+        /*
         if (m_MySlider)
         {
             Debug.Log("Find Component");
@@ -33,6 +34,9 @@ public class TankHealth : MonoBehaviour
         {
             Debug.Log("Do not Find Component");
         }
+        */
+
+
         m_ExplosionParticles.gameObject.SetActive(false);
     }
 
@@ -75,6 +79,7 @@ public class TankHealth : MonoBehaviour
         }
     }
     
+
     private void OnDeath()
     {
         // Play the effects for the death of the tank and deactivate it.

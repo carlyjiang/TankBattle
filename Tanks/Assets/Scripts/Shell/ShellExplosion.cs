@@ -47,10 +47,7 @@ public class ShellExplosion : MonoBehaviour
 				//float damege = CalculateDamage(targetRigidbody.position);
 				oilhealth.TakeDamage(1);
 			}
-
-            
         }
-		
 
         // Unparent the particles from the shell.
         m_ExplosionParticles.transform.parent = null;
@@ -61,14 +58,12 @@ public class ShellExplosion : MonoBehaviour
         // Play the explosion sound effect.
         //m_ExplosionAudio.Play();
 
-
         // Once the particles have finished, destroy the gameobject they are on.
         //Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
 		Destroy(m_ExplosionParticles.gameObject, 2f);
 
         // Destroy the shell.
         Destroy(gameObject);
-
     }
 
 
@@ -94,6 +89,3 @@ public class ShellExplosion : MonoBehaviour
         return damage;
     }
 }
-
-
-
