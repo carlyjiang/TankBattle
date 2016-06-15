@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ShellExplosion : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class ShellExplosion : MonoBehaviour
 
             TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
 			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
+			HouseHealth house1 = targetRigidbody.GetComponent<HouseHealth>();
+
 			if (targetHealth) 
 			{
 				float damege = CalculateDamage(targetRigidbody.position);
@@ -47,6 +50,12 @@ public class ShellExplosion : MonoBehaviour
 				//float damege = CalculateDamage(targetRigidbody.position);
 				oilhealth.TakeDamage(1);
 			}
+			if (house1) 
+			{
+				//float damege = CalculateDamage(targetRigidbody.position);
+				house1.TakeDamage(100);
+			}
+
         }
 
         // Unparent the particles from the shell.

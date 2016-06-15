@@ -1,28 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &181776
+--- !u!1 &159966
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 496686}
-  - 198: {fileID: 19815856}
-  - 199: {fileID: 19921240}
+  - 4: {fileID: 491542}
+  - 198: {fileID: 19894992}
+  - 199: {fileID: 19996852}
   m_Layer: 0
-  m_Name: OilStorage
+  m_Name: OilStorageExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &496686
+--- !u!4 &491542
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181776}
+  m_GameObject: {fileID: 159966}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 26.5, y: 3.1039524, z: -32.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -30,12 +30,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!198 &19815856
+--- !u!198 &19894992
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181776}
+  m_GameObject: {fileID: 159966}
   serializedVersion: 2
   lengthInSec: 1.05
   startDelay:
@@ -1509,12 +1509,12 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
---- !u!199 &19921240
+--- !u!199 &19996852
 ParticleSystemRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181776}
+  m_GameObject: {fileID: 159966}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1559,5 +1559,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 181776}
+  m_RootGameObject: {fileID: 159966}
   m_IsPrefabParent: 1
