@@ -12,18 +12,15 @@ public class TankMovement : MonoBehaviour
     public float m_PitchRange = 0.2f;
 
     public float speed = 0.1F;
-
     public GameObject particle;
-
-
+    
     private string m_MovementAxisName;     
-    private string m_TurnAxisName;         
+    private string m_TurnAxisName;
     private Rigidbody m_Rigidbody;         
     private float m_MovementInputValue;    
     private float m_TurnInputValue;        
     private float m_OriginalPitch;
     private VirtualStick virtualStick;
-
 
     private void Awake()
     {
@@ -58,9 +55,7 @@ public class TankMovement : MonoBehaviour
     private void Update()
     {
         // Store the player's input and make sure the audio for the engine is playing.
-        //m_MovementInputValue = Input.GetAxis(m_MovementAxisName);
-        //m_TurnInputValue = Input.GetAxis(m_TurnAxisName);
-
+        
         m_MovementInputValue = virtualStick.Vertical();
         m_TurnInputValue = virtualStick.Horizontal();
 
@@ -104,16 +99,6 @@ public class TankMovement : MonoBehaviour
         // Adjust the position of the tank based on the player's input.
         Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * TimeScale() * Time.deltaTime;
         m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
-
-        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        //{
-            // Get movement of the finger since last frame
-            //Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-
-            //movement = transform.forward * touchDeltaPosition.y * speed * m_Speed * TimeScale() * Time.deltaTime;
-            // Move object across XY plane
-            //m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
-        //}
     }
 
 
