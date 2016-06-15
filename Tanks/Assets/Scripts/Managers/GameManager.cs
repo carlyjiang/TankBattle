@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
     public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
 	public GameObject Enemy;
+	public float spawnRate;
 
-
+	private float nextSpawn;
     private int m_RoundNumber;                  // Which round the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
@@ -28,14 +29,20 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         SpawnAllTanks();
-
-		SpawnEnemy ();
         SetCameraTargets();
 
         // Once the tanks have been created and the camera is using them as targets, start the game.
         StartCoroutine(GameLoop());
     }
 
+
+
+	private void Update(){
+		if(Time.time > nextSpawn) {
+			nextSpawn = Time.time + spawnRate;
+			SpawnEnemy ();
+		}
+	}
 
     private void SpawnAllTanks()
     {
@@ -56,6 +63,7 @@ public class GameManager : MonoBehaviour
 	{
 		Vector3 ve = new Vector3 (10F, 0, 0);
 		Instantiate (Enemy, ve, Quaternion.identity);
+
 	}
 
     private void SetCameraTargets()
