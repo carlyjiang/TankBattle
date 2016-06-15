@@ -14,12 +14,16 @@ public class GameManager : MonoBehaviour
 	public GameObject Enemy;
 	public float spawnRate;
 
+    public bool spawnEnemies;                   // debug only, release version must be set to true
+
 	private float nextSpawn;
     private int m_RoundNumber;                  // Which round the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
     private TankManager m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
     private TankManager m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
+
+    
 
 
     private void Start()
@@ -40,7 +44,11 @@ public class GameManager : MonoBehaviour
 	private void Update(){
 		if(Time.time > nextSpawn) {
 			nextSpawn = Time.time + spawnRate;
-			SpawnEnemy ();
+
+            if (spawnEnemies)
+            {
+                SpawnEnemy();
+            }
 		}
 	}
 
