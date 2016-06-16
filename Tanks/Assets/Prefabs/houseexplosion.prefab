@@ -594,7 +594,7 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4282526254
+          rgba: 4282526248
         key1:
           serializedVersion: 2
           rgba: 4294967295
