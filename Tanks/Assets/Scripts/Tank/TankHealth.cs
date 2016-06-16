@@ -25,18 +25,6 @@ public class TankHealth : MonoBehaviour
         if (gameObject.tag == "Player")
             m_MySlider = GameObject.FindGameObjectWithTag("HealthSlider").GetComponent<Slider>();
 
-        /*
-        if (m_MySlider)
-        {
-            Debug.Log("Find Component");
-        }
-        else
-        {
-            Debug.Log("Do not Find Component");
-        }
-        */
-
-
         m_ExplosionParticles.gameObject.SetActive(false);
     }
 

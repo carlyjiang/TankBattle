@@ -323,7 +323,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.81645846, y: 0.047076687, z: -11.088805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -910,7 +910,9 @@ MonoBehaviour:
   m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
   m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
   m_PitchRange: 0.2
+  speed: 0.1
   particle: {fileID: 103826, guid: f7d21fc1ac9d205439287734ba0bdb3c, type: 2}
+  frozenSpeed: 1
 --- !u!114 &11455882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -924,6 +926,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerNumber: 1
   m_Shell: {fileID: 5421562, guid: 40f6d08f180c80e418a3eff1a61d7837, type: 2}
+  m_FrozonShell: {fileID: 5421562, guid: df08c8cc9093bef45991baa007bc063a, type: 2}
+  m_CannonShell: {fileID: 5421562, guid: 59473362aba2ac24596a1771751a0ec9, type: 2}
   m_Field: {fileID: 118878, guid: 6aab4d903f0ea48beb95a8bc67f3f1fc, type: 2}
   m_FireTransform: {fileID: 438546}
   m_AimSlider: {fileID: 11469050}
@@ -934,6 +938,9 @@ MonoBehaviour:
   m_MaxLaunchForce: 30
   m_MaxChargeTime: 0.75
   m_AimCross: {fileID: 134774}
+  m_SpecialWeapon: 0
+  m_SpecialWeaponCount: 0
+  m_ShellIndicatorImage: {fileID: 0}
 --- !u!114 &11456448
 MonoBehaviour:
   m_ObjectHideFlags: 1

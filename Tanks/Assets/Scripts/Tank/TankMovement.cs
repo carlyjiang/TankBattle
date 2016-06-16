@@ -3,29 +3,33 @@ using System.Linq;
 
 public class TankMovement : MonoBehaviour
 {
-    public int m_PlayerNumber = 1;         
-    public float m_Speed = 12f;            
-    public float m_TurnSpeed = 180f;       
-    public AudioSource m_MovementAudio;    
-    public AudioClip m_EngineIdling;       
-    public AudioClip m_EngineDriving;      
+    public int m_PlayerNumber = 1;
+    public float m_Speed = 12f;
+    public float m_TurnSpeed = 180f;
+    public AudioSource m_MovementAudio;
+    public AudioClip m_EngineIdling;
+    public AudioClip m_EngineDriving;
     public float m_PitchRange = 0.2f;
 
     public float speed = 0.1F;
     public GameObject particle;
+    public float frozenSpeed = 1f;
     
-    private string m_MovementAxisName;     
+    private string m_MovementAxisName;
     private string m_TurnAxisName;
-    private Rigidbody m_Rigidbody;         
-    private float m_MovementInputValue;    
-    private float m_TurnInputValue;        
+    private Rigidbody m_Rigidbody;
+    private float m_MovementInputValue;
+    private float m_TurnInputValue;
     private float m_OriginalPitch;
     private VirtualStick virtualStick;
+
+    
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        virtualStick = GameObject.FindGameObjectWithTag("VirtualStick").GetComponent<VirtualStick>();
+        virtualStick = GameObject.FindGameObjectWithTag("VirtualStick").
+            GetComponent<VirtualStick>();
     }
 
 
@@ -55,7 +59,6 @@ public class TankMovement : MonoBehaviour
     private void Update()
     {
         // Store the player's input and make sure the audio for the engine is playing.
-        
         m_MovementInputValue = virtualStick.Vertical();
         m_TurnInputValue = virtualStick.Horizontal();
 
@@ -97,7 +100,7 @@ public class TankMovement : MonoBehaviour
     private void Move()
     {
         // Adjust the position of the tank based on the player's input.
-        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * TimeScale() * Time.deltaTime;
+        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * TimeScale() * Time.deltaTime * frozenSpeed;
         m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
     }
 
@@ -105,12 +108,15 @@ public class TankMovement : MonoBehaviour
     private void Turn()
     {
         // Adjust the rotation of the tank based on the player's input.
-        float turn = m_TurnInputValue * m_TurnSpeed * TimeScale() * Time.deltaTime;
+        float turn = m_TurnInputValue * m_TurnSpeed * TimeScale() * Time.deltaTime * frozenSpeed;
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
         m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
     }
 
     private float TimeScale() {
-        return TankShooting.m_FieldPositions.Any() ? System.Math.Min(1, TankShooting.m_FieldPositions.Min(v => Vector3.Distance(m_Rigidbody.position, v)) / 20) : 1;
+        return TankShooting.m_FieldPositions.Any() ? 
+            System.Math.Min(1, TankShooting.m_FieldPositions.
+            Min(v => Vector3.Distance(m_Rigidbody.position, v)) / 20) : 1;
     }
 }
+
