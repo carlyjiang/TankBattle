@@ -19,6 +19,7 @@ public class Navi : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
+		//nav.speed = 4;
 		if (player != null) {
 			nav.SetDestination (player.transform.position);
 		}

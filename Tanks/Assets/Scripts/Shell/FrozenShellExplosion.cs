@@ -10,7 +10,8 @@ public class FrozenShellExplosion : MonoBehaviour
     public float m_MaxLifeTime = 1f;                  
     public float m_ExplosionRadius;
     public int shellType; // 0 for normal shell, 1 for frozen shell, 2 for cannon shell       
-    public GameObject FrozenFieldPreb;      
+    public GameObject FrozenFieldPreb;
+    public float FieldHeight;   
 
 
     private void Start()
@@ -22,7 +23,7 @@ public class FrozenShellExplosion : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Vector3 explosionPosition = transform.position;
-        explosionPosition.y = 0.1f;
+        explosionPosition.y = 0.15f;
         GameObject frozenField = Instantiate(FrozenFieldPreb, explosionPosition, new Quaternion(0f, 0f, 0f, 0f)) as GameObject;
 
         /*

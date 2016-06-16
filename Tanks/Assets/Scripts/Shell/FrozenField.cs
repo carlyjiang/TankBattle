@@ -6,6 +6,7 @@ public class FrozenField : MonoBehaviour {
     public float m_MaxLifeTime = 30f;
     private float startTime;
     public float m_ExplosionRadius = 10f;
+	public float EnemyMaxSpeed = 4f;
 
 
     // Use this for initialization
@@ -28,11 +29,20 @@ public class FrozenField : MonoBehaviour {
             if (movement)
             {
                 float radio = Vector3.Distance(transform.position, c.transform.position) / m_ExplosionRadius;
-                //Debug.Log(radio);
                 movement.frozenSpeed = Mathf.Max(0.1f, radio);
             }
+			NavMeshAgent nv = c.GetComponent<NavMeshAgent> ();
+			if (nv) {
+				float radio = Vector3.Distance(transform.position, c.transform.position) / m_ExplosionRadius;
+				nv.speed = Mathf.Max(0.1f, radio * EnemyMaxSpeed);
+				//print (nv.speed);
+			} else {
+				//Debug.Log ("Not Get Enemy in Frozen Field");
+			}
+				
         }
     }
+
 
     void OnDestroy()
     {

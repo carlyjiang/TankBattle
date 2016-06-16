@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CannonWeaponBonus : MonoBehaviour {
-
+    public int m_FillCount;
 	// Use this for initialization
 	void Start () {
 	
@@ -21,7 +21,7 @@ public class CannonWeaponBonus : MonoBehaviour {
 
             TankShooting ts = other.GetComponent<TankShooting>();
             ts.m_SpecialWeapon = 2;
-            ts.m_SpecialWeaponCount = 5;
+            ts.m_SpecialWeaponCount = m_FillCount;
         }
     }
 }

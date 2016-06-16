@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class FrozenWeaponBonus : MonoBehaviour {
-
+    public int m_FillCount;
 	// Use this for initialization
 	void Start () {
 	
@@ -22,7 +22,7 @@ public class FrozenWeaponBonus : MonoBehaviour {
 
             TankShooting ts = other.GetComponent<TankShooting>();
             ts.m_SpecialWeapon = 1;
-            ts.m_SpecialWeaponCount = 2;
+            ts.m_SpecialWeaponCount = m_FillCount;
         }
     }
 }

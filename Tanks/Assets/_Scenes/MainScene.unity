@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e046281c5b156c41a4472a81d8ebeaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FillCount: 3
 --- !u!1 &387436953
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,8 +651,8 @@ MonoBehaviour:
     m_Instance: {fileID: 0}
     m_Wins: 0
   Enemy: {fileID: 176758, guid: ccc95c0ce7237427c849f7b98044840f, type: 2}
-  spawnRate: 10
-  spawnEnemies: 0
+  spawnRate: 30
+  spawnEnemies: 1
 --- !u!4 &563313709
 Transform:
   m_ObjectHideFlags: 0
@@ -932,6 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1889b1dc3d4a9d84d8f1f7a3ee1c23f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FillCount: 5
 --- !u!23 &777540387
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -39,28 +39,26 @@ public class GameManager : MonoBehaviour
         // Once the tanks have been created and the camera is using them as targets, start the game.
         StartCoroutine(GameLoop());
 	}
-
-
+    
 
 	private void Update(){
-		if(Time.time > nextSpawn1) {
-			nextSpawn1 = Time.time + spawnRate;
-
-            if (spawnEnemies)
-            {
-				Vector3 ve1 = new Vector3 (10F, 0, 0);
+        if (spawnEnemies)
+        {
+            if (Time.time > nextSpawn1) {
+			    nextSpawn1 = Time.time + spawnRate;
+				Vector3 ve1 = new Vector3 (10F, 0, 10F);
                 SpawnEnemy(ve1);
 				print (nextSpawn1 + "    "+Time.time );
-
             }
-		}
-		if(Time.time > nextSpawn2 ){
-			nextSpawn2 = Time.time + spawnRate + 2f;
-			print (".....");
-			Vector3 ve2 = new Vector3 (25f, 0, -25f);
-			SpawnEnemy(ve2);
-		}
 
+            if (Time.time > nextSpawn2)
+            {
+                nextSpawn2 = Time.time + spawnRate + 10f;
+                print(".....");
+                Vector3 ve2 = new Vector3(-25f, 0, -25f);
+                SpawnEnemy(ve2);
+            }
+        }
 	}
 
     private void SpawnAllTanks()
