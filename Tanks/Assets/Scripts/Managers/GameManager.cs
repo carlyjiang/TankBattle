@@ -24,8 +24,6 @@ public class GameManager : MonoBehaviour
     private TankManager m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
     
-
-
     private void Start()
     {
         // Create the delays so they only have to be made once.
@@ -41,8 +39,10 @@ public class GameManager : MonoBehaviour
 
 
 
-	private void Update(){
-		if(Time.time > nextSpawn) {
+	private void Update()
+    {
+		if(Time.time > nextSpawn)
+        {
 			nextSpawn = Time.time + spawnRate;
 
             if (spawnEnemies)
@@ -58,10 +58,16 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             // ... create them, set their player number and references needed for control.
-            m_Tanks[i].m_Instance =
+            /*m_Tanks[i].m_Instance =
                 Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, 
                 m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
-		
+                */
+
+            m_Tanks[i].m_Instance =
+                Instantiate(m_TankPrefab, new Vector3(0, 0, 0),
+                new Quaternion(60,0,0,0)) as GameObject;
+                
+
             m_Tanks[i].m_PlayerNumber = i + 1;
             m_Tanks[i].Setup();
         }

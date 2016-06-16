@@ -36,7 +36,6 @@ public class OilStorageHealth : MonoBehaviour {
 		{
 			OnDeath();
 		}
-
 	}
 		
 	private void OnDeath()
@@ -53,6 +52,7 @@ public class OilStorageHealth : MonoBehaviour {
 
 	private void OnTriggerEnter()
 	{
+        /*
 		// Find all the items in an area around the shell and damage them.
 		Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
 
@@ -66,21 +66,13 @@ public class OilStorageHealth : MonoBehaviour {
 			}
 
 			targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);
-
-			TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
 			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
-			if (targetHealth) 
-			{
-				
-				targetHealth.TakeDamage(1);	
-			}
+
 			if (oilhealth) 
 			{
 				//float damege = CalculateDamage(targetRigidbody.position);
 				oilhealth.TakeDamage(1);
 			}
-
-
 		}
 
 		// Unparent the particles from the shell.
@@ -97,7 +89,7 @@ public class OilStorageHealth : MonoBehaviour {
 
 		// Destroy the shell.
 		Destroy(gameObject);
-
+        */
 	}
 
 }

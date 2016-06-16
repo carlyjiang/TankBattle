@@ -6,6 +6,8 @@ public class TankShooting : MonoBehaviour
 {
     public int m_PlayerNumber = 1;              // Used to identify the different players.
     public Rigidbody m_Shell;                   // Prefab of the shell.
+    public Rigidbody m_FrozonShell;                   // Prefab of the shell.
+    public Rigidbody m_CannonShell;                   // Prefab of the shell.
     public GameObject m_Field;
     public static List<Vector3> m_FieldPositions = new List<Vector3>();
     public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
@@ -25,7 +27,10 @@ public class TankShooting : MonoBehaviour
     private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
     private Vector3 m_AimCrossOriginalPositionOffset;
 
-    private ShootButton shootButton;
+    private ShootButton shootButton;            // add touch screen shooting button
+
+    public int m_SpecialWeapon; // 0 for none, 1 for cannon shell, 2 for frozen shell
+    public int m_SpecialWeaponCount = 0;
 
 
     private void OnEnable()
@@ -88,13 +93,28 @@ public class TankShooting : MonoBehaviour
         }
     }
 
-
+    // normal shell fire
     private void Fire()
     {
         m_Fired = true;
+        Rigidbody shellInstance = null;
 
-        Rigidbody shellInstance =
-            Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+        if (m_SpecialWeapon == 1 && m_SpecialWeaponCount > 0)
+        {
+            m_SpecialWeaponCount--;
+            shellInstance = Instantiate(m_FrozonShell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+        }
+        else if (m_SpecialWeapon == 2 && m_SpecialWeaponCount > 0)
+        {
+            m_SpecialWeaponCount--;
+            shellInstance = Instantiate(m_CannonShell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+        }
+        else
+        {
+            shellInstance = Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+            m_SpecialWeapon = 0;
+            m_SpecialWeaponCount--;
+        }
 
         shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
 

@@ -3,29 +3,32 @@ using System.Linq;
 
 public class TankMovement : MonoBehaviour
 {
-    public int m_PlayerNumber = 1;         
-    public float m_Speed = 12f;            
-    public float m_TurnSpeed = 180f;       
-    public AudioSource m_MovementAudio;    
-    public AudioClip m_EngineIdling;       
-    public AudioClip m_EngineDriving;      
+    public int m_PlayerNumber = 1;
+    public float m_Speed = 12f;
+    public float m_TurnSpeed = 180f;
+    public AudioSource m_MovementAudio;
+    public AudioClip m_EngineIdling;
+    public AudioClip m_EngineDriving;
     public float m_PitchRange = 0.2f;
 
     public float speed = 0.1F;
     public GameObject particle;
     
-    private string m_MovementAxisName;     
+    private string m_MovementAxisName;
     private string m_TurnAxisName;
-    private Rigidbody m_Rigidbody;         
-    private float m_MovementInputValue;    
-    private float m_TurnInputValue;        
+    private Rigidbody m_Rigidbody;
+    private float m_MovementInputValue;
+    private float m_TurnInputValue;
     private float m_OriginalPitch;
     private VirtualStick virtualStick;
+
+    
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        virtualStick = GameObject.FindGameObjectWithTag("VirtualStick").GetComponent<VirtualStick>();
+        virtualStick = GameObject.FindGameObjectWithTag("VirtualStick").
+            GetComponent<VirtualStick>();
     }
 
 
@@ -55,7 +58,6 @@ public class TankMovement : MonoBehaviour
     private void Update()
     {
         // Store the player's input and make sure the audio for the engine is playing.
-        
         m_MovementInputValue = virtualStick.Vertical();
         m_TurnInputValue = virtualStick.Horizontal();
 
@@ -111,6 +113,9 @@ public class TankMovement : MonoBehaviour
     }
 
     private float TimeScale() {
-        return TankShooting.m_FieldPositions.Any() ? System.Math.Min(1, TankShooting.m_FieldPositions.Min(v => Vector3.Distance(m_Rigidbody.position, v)) / 20) : 1;
+        return TankShooting.m_FieldPositions.Any() ? 
+            System.Math.Min(1, TankShooting.m_FieldPositions.
+            Min(v => Vector3.Distance(m_Rigidbody.position, v)) / 20) : 1;
     }
 }
+

@@ -6,10 +6,11 @@ public class ShellExplosion : MonoBehaviour
     
     public ParticleSystem m_ExplosionParticles;       
     public AudioSource m_ExplosionAudio;              
-    public float m_MaxDamage = 100f;                  
-    public float m_ExplosionForce = 1000f;            
-    public float m_MaxLifeTime = 2f;                  
-    public float m_ExplosionRadius = 5f;              
+    public float m_MaxDamage;                  
+    public float m_ExplosionForce;            
+    public float m_MaxLifeTime = 1f;                  
+    public float m_ExplosionRadius;
+    public int shellType; // 0 for normal shell, 1 for frozen shell, 2 for cannon shell             
 
 
     private void Start()
@@ -20,10 +21,8 @@ public class ShellExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         // Find all the tanks in an area around the shell and damage them.		
         Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
-
 
         for (int i = 0; i < collider.Length; i++)
         {
@@ -40,22 +39,21 @@ public class ShellExplosion : MonoBehaviour
 			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
 			HouseHealth house1 = targetRigidbody.GetComponent<HouseHealth>();
 
-			if (targetHealth) 
+            if (targetHealth) 
 			{
 				float damege = CalculateDamage(targetRigidbody.position);
 				targetHealth.TakeDamage(damege);	
 			}
 			if (oilhealth) 
 			{
-				//float damege = CalculateDamage(targetRigidbody.position);
-				oilhealth.TakeDamage(1);
+				float damege = CalculateDamage(targetRigidbody.position);
+				oilhealth.TakeDamage(damege);
 			}
 			if (house1) 
 			{
-				//float damege = CalculateDamage(targetRigidbody.position);
-				house1.TakeDamage(100);
+				float damege = CalculateDamage(targetRigidbody.position);
+				house1.TakeDamage(damege);
 			}
-
         }
 
         // Unparent the particles from the shell.
@@ -98,3 +96,5 @@ public class ShellExplosion : MonoBehaviour
         return damage;
     }
 }
+
+

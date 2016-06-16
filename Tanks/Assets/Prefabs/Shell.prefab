@@ -295,15 +295,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a77fdcebbe85f14ab98dfad5da07c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TankMask:
-    serializedVersion: 2
-    m_Bits: 512
   m_ExplosionParticles: {fileID: 19879630}
   m_ExplosionAudio: {fileID: 0}
   m_MaxDamage: 100
   m_ExplosionForce: 1000
-  m_MaxLifeTime: 2
+  m_MaxLifeTime: 1
   m_ExplosionRadius: 5
+  shellType: 0
 --- !u!136 &13614942
 CapsuleCollider:
   m_ObjectHideFlags: 1
