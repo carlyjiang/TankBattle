@@ -299,7 +299,7 @@ MonoBehaviour:
   m_ExplosionAudio: {fileID: 0}
   m_MaxDamage: 100
   m_ExplosionForce: 1000
-  m_MaxLifeTime: 1
+  m_MaxLifeTime: 2
   m_ExplosionRadius: 5
   shellType: 0
 --- !u!136 &13614942

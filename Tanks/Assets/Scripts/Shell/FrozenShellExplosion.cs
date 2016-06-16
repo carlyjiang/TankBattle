@@ -9,7 +9,8 @@ public class FrozenShellExplosion : MonoBehaviour
     public float m_ExplosionForce;            
     public float m_MaxLifeTime = 1f;                  
     public float m_ExplosionRadius;
-    public int shellType; // 0 for normal shell, 1 for frozen shell, 2 for cannon shell             
+    public int shellType; // 0 for normal shell, 1 for frozen shell, 2 for cannon shell       
+    public GameObject FrozenFieldPreb;      
 
 
     private void Start()
@@ -20,41 +21,12 @@ public class FrozenShellExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Find all the tanks in an area around the shell and damage them.		
-        Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
-
-        for (int i = 0; i < collider.Length; i++)
-        {
-            Rigidbody targetRigidbody = collider[i].GetComponent<Rigidbody>();
-            
-            if(!targetRigidbody)
-            {
-                continue;
-            }
-
-            targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);
-
-            TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
-			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
-			HouseHealth house1 = targetRigidbody.GetComponent<HouseHealth>();
-
-            if (targetHealth) 
-			{
-				float damege = CalculateDamage(targetRigidbody.position);
-				targetHealth.TakeDamage(damege);	
-			}
-			if (oilhealth) 
-			{
-				float damege = CalculateDamage(targetRigidbody.position);
-				oilhealth.TakeDamage(damege);
-			}
-			if (house1) 
-			{
-				float damege = CalculateDamage(targetRigidbody.position);
-				house1.TakeDamage(damege);
-			}
-        }
-
+        Vector3 explosionPosition = transform.position;
+        explosionPosition.y = 0.1f;
+        GameObject frozenField = Instantiate(FrozenFieldPreb, explosionPosition, new Quaternion(0f,0f,0f,0f)) as GameObject;
+        
+        /*
+        
         // Unparent the particles from the shell.
         m_ExplosionParticles.transform.parent = null;
 
@@ -68,7 +40,10 @@ public class FrozenShellExplosion : MonoBehaviour
         //Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
 		Destroy(m_ExplosionParticles.gameObject, 2f);
 
+        */
+
         // Destroy the shell.
+        
         Destroy(gameObject);
     }
 

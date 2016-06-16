@@ -24,9 +24,5 @@ public class FrozenWeaponBonus : MonoBehaviour {
             ts.m_SpecialWeapon = 1;
             ts.m_SpecialWeaponCount = 2;
         }
-        else
-        {
-            Debug.Log("Hit other things");
-        }
     }
 }

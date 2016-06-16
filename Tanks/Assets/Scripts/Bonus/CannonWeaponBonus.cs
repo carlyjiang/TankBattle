@@ -17,17 +17,11 @@ public class CannonWeaponBonus : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            //other.gameObject.SetActive(false);
-            Debug.Log("Hit Player");
             this.gameObject.SetActive(false);
 
             TankShooting ts = other.GetComponent<TankShooting>();
             ts.m_SpecialWeapon = 2;
             ts.m_SpecialWeaponCount = 5;
-        }
-        else
-        {
-            Debug.Log("Hit other things");
         }
     }
 }
