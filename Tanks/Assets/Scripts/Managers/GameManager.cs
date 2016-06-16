@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +15,10 @@ public class GameManager : MonoBehaviour
     public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
 	public GameObject Enemy;
 	public float spawnRate;
+    public float spawnRateDelay;
 
     public bool spawnEnemies;                   // debug only, release version must be set to true
+    private List<GameObject> m_Enemies = new List<GameObject>();
 
 	private float nextSpawn1;
 	private float nextSpawn2;
@@ -24,8 +28,13 @@ public class GameManager : MonoBehaviour
     private TankManager m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
     private TankManager m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
-    
+    public float m_EnemyStartSpawnDelayTime;
 
+    private float m_StartTime;
+
+    public FrozenWeaponBonus[] m_FrozenBonus;
+    public CannonWeaponBonus[] m_CannonBonus;
+    
 
     private void Start()
     {
@@ -36,28 +45,42 @@ public class GameManager : MonoBehaviour
         SpawnAllTanks();
         SetCameraTargets();
 
+        m_StartTime = Time.time;
+        nextSpawn1 = 0;
+        nextSpawn2 = 0;
+
         // Once the tanks have been created and the camera is using them as targets, start the game.
         StartCoroutine(GameLoop());
 	}
     
 
-	private void Update(){
-        if (spawnEnemies)
+	private void Update()
+    {
+        if (spawnEnemies && Time.time - m_StartTime > m_EnemyStartSpawnDelayTime)
         {
-            if (Time.time > nextSpawn1) {
+            if (Time.time > nextSpawn1)
+            {
 			    nextSpawn1 = Time.time + spawnRate;
-				Vector3 ve1 = new Vector3 (10F, 0, 10F);
+				Vector3 ve1 = new Vector3 (20F, 0F, 20F);
                 SpawnEnemy(ve1);
-				print (nextSpawn1 + "    "+Time.time );
             }
 
             if (Time.time > nextSpawn2)
             {
-                nextSpawn2 = Time.time + spawnRate + 10f;
-                print(".....");
-                Vector3 ve2 = new Vector3(-25f, 0, -25f);
+                nextSpawn2 = Time.time + spawnRate + spawnRateDelay;
+                Vector3 ve2 = new Vector3(-25F, 0F, -25F);
                 SpawnEnemy(ve2);
             }
+        }
+
+        foreach (FrozenWeaponBonus g in m_FrozenBonus)
+        {
+            g.RandomSpawn();
+        }
+
+        foreach (CannonWeaponBonus g in m_CannonBonus)
+        {
+            g.RandomSpawn();
         }
 	}
 
@@ -66,26 +89,18 @@ public class GameManager : MonoBehaviour
         // For all the tanks...
         for (int i = 0; i < m_Tanks.Length; i++)
         {
-            // ... create them, set their player number and references needed for control.
-            /*m_Tanks[i].m_Instance =
-                Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, 
-                m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
-                */
-
             m_Tanks[i].m_Instance =
-                Instantiate(m_TankPrefab, new Vector3(0, 0, 0),
-                new Quaternion(60,0,0,0)) as GameObject;
-                
+                Instantiate(m_TankPrefab) as GameObject;
 
             m_Tanks[i].m_PlayerNumber = i + 1;
             m_Tanks[i].Setup();
         }
     }
 
-	private void SpawnEnemy(Vector3 ve )
+	private void SpawnEnemy(Vector3 ve)
 	{
-		Instantiate (Enemy, ve, Quaternion.identity);
-
+		GameObject ob = Instantiate (Enemy, ve, Quaternion.identity) as GameObject;
+        m_Enemies.Add(ob);
 	}
 
     private void SetCameraTargets()
@@ -132,6 +147,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RoundStarting()
     {
+        m_StartTime = Time.time;
         // As soon as the round starts reset the tanks and make sure they can't move.
         ResetAllTanks();
         DisableTankControl();
@@ -196,16 +212,19 @@ public class GameManager : MonoBehaviour
         // Start the count of tanks left at zero.
         int numTanksLeft = 0;
 
+        return m_Tanks[0].m_Instance.activeSelf ? false : true;
+
         // Go through all the tanks...
+        /*
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             // ... and if they are active, increment the counter.
             if (m_Tanks[i].m_Instance.activeSelf)
                 numTanksLeft++;
         }
+        */
 
         // If there are one or fewer tanks remaining return true, otherwise return false.
-        return false;
     }
 
 
@@ -245,6 +264,12 @@ public class GameManager : MonoBehaviour
     // Returns a string message to display at the end of each round.
     private string EndMessage()
     {
+        float lastingTime = Time.time - m_StartTime;
+        string surviveTime = "You Survive \n" + Convert.ToString((int)lastingTime) + " Seconds!";
+        return surviveTime;
+
+
+        /*
         // By default when a round ends there are no winners so the default end message is a draw.
         string message = "DRAW!";
 
@@ -266,12 +291,19 @@ public class GameManager : MonoBehaviour
             message = m_GameWinner.m_ColoredPlayerText + " WINS THE GAME!";
 
         return message;
+        */
     }
 
 
     // This function is used to turn all the tanks back on and reset their positions and properties.
     private void ResetAllTanks()
     {
+        foreach(GameObject o in m_Enemies)
+        {
+            Destroy(o);
+        }
+        m_Enemies.Clear();
+
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             m_Tanks[i].Reset();
