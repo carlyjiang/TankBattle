@@ -23,8 +23,8 @@ public class FrozenShellExplosion : MonoBehaviour
     {
         Vector3 explosionPosition = transform.position;
         explosionPosition.y = 0.1f;
-        GameObject frozenField = Instantiate(FrozenFieldPreb, explosionPosition, new Quaternion(0f,0f,0f,0f)) as GameObject;
-        
+        GameObject frozenField = Instantiate(FrozenFieldPreb, explosionPosition, new Quaternion(0f, 0f, 0f, 0f)) as GameObject;
+
         /*
         
         // Unparent the particles from the shell.
@@ -43,31 +43,8 @@ public class FrozenShellExplosion : MonoBehaviour
         */
 
         // Destroy the shell.
-        
+
         Destroy(gameObject);
-    }
-
-
-    public float CalculateDamage(Vector3 targetPosition)
-    {
-        // Calculate the amount of damage a target should take based on it's position.
-
-        // Create a vector from the shell to the target.
-        Vector3 explosionToTarget = targetPosition - transform.position;
-
-        // Calculate the distance from the shell to the target.
-        float explosionDistance = explosionToTarget.magnitude;
-
-        // Calculate the proportion of the maximum distance (the explosionRadius) the target is away.
-        float relativeDistance = (m_ExplosionRadius - explosionDistance) / m_ExplosionRadius;
-
-        // Calculate damage as this proportion of the maximum possible damage.
-        float damage = relativeDistance * m_MaxDamage;
-
-        // Make sure that the minimum damage is always 0.
-        damage = Mathf.Max(0f, damage);
-
-        return damage;
     }
 }
 

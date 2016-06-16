@@ -11,8 +11,6 @@ public class FrozenField : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Destroy(gameObject, m_MaxLifeTime);
-        Debug.Log("create a frozen field");
-        Debug.Log(transform.position);
     }
 
     // Update is called once per frame
@@ -21,7 +19,7 @@ public class FrozenField : MonoBehaviour {
     {
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
-        //List<Collider> colliders = new List<Collider>(Physics.OverlapSphere(transform.position, m_ExplosionRadius));
+        
 
         foreach (Collider c in colliders)
         {
@@ -39,7 +37,6 @@ public class FrozenField : MonoBehaviour {
     void OnDestroy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
-        //List<Collider> colliders = new List<Collider>(Physics.OverlapSphere(transform.position, m_ExplosionRadius));
 
         foreach (Collider c in colliders)
         {
@@ -53,3 +50,4 @@ public class FrozenField : MonoBehaviour {
         }
     }
 }
+

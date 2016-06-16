@@ -32,6 +32,8 @@ public class TankShooting : MonoBehaviour
     public int m_SpecialWeapon; // 0 for none, 1 for cannon shell, 2 for frozen shell
     public int m_SpecialWeaponCount = 0;
 
+    public Image m_ShellIndicatorImage;
+
 
     private void OnEnable()
     {
@@ -51,6 +53,7 @@ public class TankShooting : MonoBehaviour
         m_FireButton = "Fire" + m_PlayerNumber;
         m_ChargeSpeed = (m_MaxLaunchForce - m_MinLaunchForce) / m_MaxChargeTime;
         shootButton = GameObject.FindGameObjectWithTag("ShootButton").GetComponent<ShootButton>();
+        m_ShellIndicatorImage = GameObject.FindGameObjectWithTag("ShootButton").GetComponent<Image>();
     }
 
 
@@ -59,6 +62,8 @@ public class TankShooting : MonoBehaviour
         //m_AimSlider.value = m_MinLaunchForce;
 
         m_AimCross.gameObject.transform.position = m_AimSlider.gameObject.transform.position - m_AimCrossOriginalPositionOffset;
+
+        changeShootButtonColor();
 
         if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired)
         {
@@ -84,12 +89,21 @@ public class TankShooting : MonoBehaviour
         {
             Fire();
         }
-        else if (Input.GetKeyDown(m_PlayerNumber == 1 ? KeyCode.Q : KeyCode.L))
+    }
+
+    private void changeShootButtonColor()
+    {
+        if (m_SpecialWeapon == 1)
         {
-            // Create time manipulation field
-            Vector3 pos = m_FireTransform.position + new Vector3(0, 1, 0);
-            Instantiate(m_Field, pos, m_FireTransform.rotation);
-            m_FieldPositions.Add(pos);
+            m_ShellIndicatorImage.color = Color.blue;
+        }
+        else if (m_SpecialWeapon == 2)
+        {
+            m_ShellIndicatorImage.color = Color.red;
+        }
+        else
+        {
+            m_ShellIndicatorImage.color = Color.yellow;
         }
     }
 
@@ -116,11 +130,18 @@ public class TankShooting : MonoBehaviour
             m_SpecialWeaponCount--;
         }
 
+        if (m_SpecialWeaponCount == 0)
+        {
+            m_SpecialWeapon = 0;
+        }
+
         shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
 
         m_ShootingAudio.clip = m_FireClip;
         m_ShootingAudio.Play();
         
         m_CurrentLaunchForce = m_MinLaunchForce;
+
+        changeShootButtonColor();
     }
 }
