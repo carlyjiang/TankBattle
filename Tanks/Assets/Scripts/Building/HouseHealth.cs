@@ -20,7 +20,8 @@ public class HouseHealth : MonoBehaviour {
 	{
 		m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
 		m_ExplosionParticles.gameObject.SetActive(false);
-		m_Ruin.SetActive (false);
+        if (m_Ruin)
+            m_Ruin.SetActive (false);
 	}
 
 	private void OnEnable()
@@ -49,13 +50,10 @@ public class HouseHealth : MonoBehaviour {
 		m_ExplosionParticles.transform.position = transform.position;
 		m_ExplosionParticles.gameObject.SetActive(true);
 		m_ExplosionParticles.Play();
-		m_Ruin.SetActive (true);
+        if (m_Ruin)
+		    m_Ruin.SetActive (true);
 		//m_ExplosionAudio.Play();
 		gameObject.SetActive(false);
-
-
-
-
 	}
 
 }
