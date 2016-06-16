@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
 
     public bool spawnEnemies;                   // debug only, release version must be set to true
 
-	private float nextSpawn;
+	private float nextSpawn1;
+	private float nextSpawn2;
     private int m_RoundNumber;                  // Which round the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
@@ -37,19 +38,29 @@ public class GameManager : MonoBehaviour
 
         // Once the tanks have been created and the camera is using them as targets, start the game.
         StartCoroutine(GameLoop());
-    }
+	}
 
 
 
 	private void Update(){
-		if(Time.time > nextSpawn) {
-			nextSpawn = Time.time + spawnRate;
+		if(Time.time > nextSpawn1) {
+			nextSpawn1 = Time.time + spawnRate;
 
             if (spawnEnemies)
             {
-                SpawnEnemy();
+				Vector3 ve1 = new Vector3 (10F, 0, 0);
+                SpawnEnemy(ve1);
+				print (nextSpawn1 + "    "+Time.time );
+
             }
 		}
+		if(Time.time > nextSpawn2 ){
+			nextSpawn2 = Time.time + spawnRate + 2f;
+			print (".....");
+			Vector3 ve2 = new Vector3 (25f, 0, -25f);
+			SpawnEnemy(ve2);
+		}
+
 	}
 
     private void SpawnAllTanks()
@@ -67,9 +78,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-	private void SpawnEnemy()
+	private void SpawnEnemy(Vector3 ve )
 	{
-		Vector3 ve = new Vector3 (10F, 0, 0);
 		Instantiate (Enemy, ve, Quaternion.identity);
 
 	}

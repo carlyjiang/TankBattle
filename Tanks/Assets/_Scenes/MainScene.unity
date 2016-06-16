@@ -562,7 +562,8 @@ MonoBehaviour:
     m_Instance: {fileID: 0}
     m_Wins: 0
   Enemy: {fileID: 176758, guid: ccc95c0ce7237427c849f7b98044840f, type: 2}
-  spawnRate: 10
+  spawnRate: 20
+  spawnEnemies: 0
 --- !u!4 &563313709
 Transform:
   m_ObjectHideFlags: 0

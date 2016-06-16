@@ -27,7 +27,7 @@ public class Fire : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Collider[] c = Physics.OverlapSphere(transform.position, 10, m_TankMask);
+		Collider[] c = Physics.OverlapSphere(transform.position, 15, m_TankMask);
 
 		for (int i = 0; i< c.Length; i++){
 			
