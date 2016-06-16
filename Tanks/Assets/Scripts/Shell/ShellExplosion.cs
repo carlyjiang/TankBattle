@@ -51,8 +51,8 @@ public class ShellExplosion : MonoBehaviour
 			}
 			if (house1) 
 			{
-				float damege = CalculateDamage(targetRigidbody.position);
-				house1.TakeDamage(damege);
+                //float damege = CalculateDamage(targetRigidbody.position);
+                house1.TakeDamage(10);
 			}
         }
 
