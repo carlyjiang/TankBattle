@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private TankManager m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
     private TankManager m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
-    public float m_EnemyStartSpawnDelayTime;
+    public float m_EnemyStartSpawnTime;
 
     private float m_StartTime;
 
@@ -56,18 +56,18 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
     {
-        if (spawnEnemies && Time.time - m_StartTime > m_EnemyStartSpawnDelayTime)
+        if (spawnEnemies && Time.time - m_StartTime > m_EnemyStartSpawnTime)
         {
             if (Time.time > nextSpawn1)
             {
-			    nextSpawn1 = Time.time + spawnRate;
+			    nextSpawn1 = Time.time + spawnRate - ((Time.time - m_StartTime) / 10);
 				Vector3 ve1 = new Vector3 (20F, 0F, 20F);
                 SpawnEnemy(ve1);
             }
 
             if (Time.time > nextSpawn2)
             {
-                nextSpawn2 = Time.time + spawnRate + spawnRateDelay;
+                nextSpawn2 = Time.time + spawnRate + spawnRateDelay - ((Time.time - m_StartTime) / 10);
                 Vector3 ve2 = new Vector3(-25F, 0F, -25F);
                 SpawnEnemy(ve2);
             }

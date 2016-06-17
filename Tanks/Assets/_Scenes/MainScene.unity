@@ -655,7 +655,7 @@ MonoBehaviour:
   spawnRate: 25
   spawnRateDelay: 10
   spawnEnemies: 1
-  m_EnemyStartSpawnDelayTime: 5
+  m_EnemyStartSpawnTime: 8
   m_FrozenBonus:
   - {fileID: 310468257}
   m_CannonBonus:

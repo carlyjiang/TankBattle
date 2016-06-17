@@ -57,11 +57,31 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
 
 
     public float Horizontal()
-    {   
+    {
         if (inputVector.x != 0)
+        {
             return inputVector.x;
+            /*
+            if (inputVector.z >= 0f)
+                return inputVector.x;
+            else
+                return -inputVector.x;
+                */
+        }
         else
+        {
             return Input.GetAxis("Horizontal1");
+            /*
+            if (Input.GetAxis("Vertical1") >= 0.0)
+            {
+                return Input.GetAxis("Horizontal1");
+            }
+            else
+            {
+                return -Input.GetAxis("Horizontal1");
+            }
+            */
+        }
     }
 
 
