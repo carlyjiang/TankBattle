@@ -15,7 +15,19 @@ public class TankHealth : MonoBehaviour
     private AudioSource m_ExplosionAudio;          
     private ParticleSystem m_ExplosionParticles;   
     private float m_CurrentHealth;  
-    private bool m_Dead;            
+    private bool m_Dead;       
+    
+    private void Start()
+    {
+        if (tag != "Player")
+        {
+            MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                renderers[i].material.color = Color.red;
+            }
+        }
+    }     
 
     private void Awake()
     {

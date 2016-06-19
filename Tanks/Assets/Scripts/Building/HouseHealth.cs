@@ -52,8 +52,8 @@ public class HouseHealth : MonoBehaviour {
 		m_ExplosionParticles.Play();
         if (m_Ruin)
 		    m_Ruin.SetActive (true);
-		//m_ExplosionAudio.Play();
-		gameObject.SetActive(false);
+        //m_ExplosionAudio.Play();
+        m_ExplosionParticles.gameObject.SetActive(false);
+        gameObject.SetActive(false);
 	}
-
 }

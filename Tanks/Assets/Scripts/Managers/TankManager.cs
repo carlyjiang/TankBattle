@@ -29,12 +29,18 @@ public class TankManager
 
         m_ColoredPlayerText = "<color=#" + ColorUtility.ToHtmlStringRGB(m_PlayerColor) + ">PLAYER " + m_PlayerNumber + "</color>";
 
+        /*
         MeshRenderer[] renderers = m_Instance.GetComponentsInChildren<MeshRenderer>();
 
-        for (int i = 0; i < renderers.Length; i++)
+        if (m_Instance.tag != "Player")
         {
-            renderers[i].material.color = m_PlayerColor;
-        }
+            Debug.Log("Enemy Debug");
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                renderers[i].material.color = m_PlayerColor;
+            }
+        } 
+        */  
     }
 
 

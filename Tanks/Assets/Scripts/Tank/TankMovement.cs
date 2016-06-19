@@ -53,6 +53,9 @@ public class TankMovement : MonoBehaviour
         m_TurnAxisName = "Horizontal" + m_PlayerNumber;
 
         m_OriginalPitch = m_MovementAudio.pitch;
+
+        // Radar part
+        //((Radar)FindObjectOfType(typeof(Radar))).centerObject = this.transform;
     }
 
 

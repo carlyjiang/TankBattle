@@ -24,8 +24,7 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
         {
             pos.x = (pos.x / bgImage.rectTransform.sizeDelta.x);
             pos.y = (pos.y / bgImage.rectTransform.sizeDelta.y);
-
-
+            
 
             if (pos.x < -0.485 || pos.x > 1 || pos.y < -0.5 || pos.y > 1)
             {
@@ -33,8 +32,12 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
                 pos.y = 0;
             }
 
-            inputVector = new Vector3(pos.x*2, 0, pos.y * 2);
+            inputVector = new Vector3(Mathf.Pow(pos.x*2, 3) * 0.5f, 0, Mathf.Pow(pos.y * 2, 3));
+            inputVector.z = (inputVector.z < 0f ? inputVector.z * 0.3f : inputVector.z);
+
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
+
+            //Debug.Log(inputVector);
 
             joystickImg.rectTransform.anchoredPosition = new Vector3(
                 inputVector.x * (bgImage.rectTransform.sizeDelta.x/3), 
@@ -60,18 +63,18 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     {
         if (inputVector.x != 0)
         {
-            return inputVector.x;
-            /*
+            //return inputVector.x;
+            
             if (inputVector.z >= 0f)
                 return inputVector.x;
             else
                 return -inputVector.x;
-                */
+                
         }
         else
         {
-            return Input.GetAxis("Horizontal1");
-            /*
+            //return Input.GetAxis("Horizontal1");
+            
             if (Input.GetAxis("Vertical1") >= 0.0)
             {
                 return Input.GetAxis("Horizontal1");
@@ -80,7 +83,6 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
             {
                 return -Input.GetAxis("Horizontal1");
             }
-            */
         }
     }
 

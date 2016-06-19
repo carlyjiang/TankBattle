@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         SpawnAllTanks();
-        SetCameraTargets();
+        SetCameraTargets();        
 
         m_StartTime = Time.time;
         nextSpawn1 = 0;

@@ -13,18 +13,18 @@ public class OilStorageHealth : MonoBehaviour {
 	private float m_CurrentHealth;  
 	//private AudioSource m_ExplosionAudio;  
 
-
+    
 	private void Awake()
 	{
 		m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
 		m_ExplosionParticles.gameObject.SetActive(false);
 	}
 
+
 	private void OnEnable()
 	{   
 		m_CurrentHealth = m_StartingHealth;
 		m_Dead = false;
-
 	}
 
 	public void TakeDamage(float amount)
@@ -52,7 +52,7 @@ public class OilStorageHealth : MonoBehaviour {
 
 	private void OnTriggerEnter()
 	{
-        /*
+        
 		// Find all the items in an area around the shell and damage them.
 		Collider[] collider = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
 
@@ -89,7 +89,6 @@ public class OilStorageHealth : MonoBehaviour {
 
 		// Destroy the shell.
 		Destroy(gameObject);
-        */
+        
 	}
-
 }
