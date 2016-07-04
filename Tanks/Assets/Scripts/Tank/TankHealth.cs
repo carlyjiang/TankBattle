@@ -3,31 +3,35 @@ using UnityEngine.UI;
 
 public class TankHealth : MonoBehaviour
 {
-    public float m_StartingHealth = 100f;          
-    public Slider m_Slider;                        
-    public Image m_FillImage;                      
-    public Color m_FullHealthColor = Color.green;  
-    public Color m_ZeroHealthColor = Color.red;    
+    public float m_StartingHealth = 100f;
+    public float m_PlayerStartingHealth = 500f;
+
+    public Slider m_Slider;
+    public Image m_FillImage;
+    public Color m_FullHealthColor = Color.green;
+    public Color m_ZeroHealthColor = Color.red;
     public GameObject m_ExplosionPrefab;
 
-    private Slider m_MySlider;
-    
-    private AudioSource m_ExplosionAudio;          
-    private ParticleSystem m_ExplosionParticles;   
-    private float m_CurrentHealth;  
-    private bool m_Dead;       
-    
+    private Slider m_HealthSlider;
+
+    private AudioSource m_ExplosionAudio;
+    private ParticleSystem m_ExplosionParticles;
+    private float m_CurrentHealth;
+    private bool m_Dead;
+
     private void Start()
     {
         if (tag != "Player")
         {
             MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+
             for (int i = 0; i < renderers.Length; i++)
             {
                 renderers[i].material.color = Color.red;
             }
         }
-    }     
+    }
+
 
     private void Awake()
     {
@@ -35,7 +39,9 @@ public class TankHealth : MonoBehaviour
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
 
         if (gameObject.tag == "Player")
-            m_MySlider = GameObject.FindGameObjectWithTag("HealthSlider").GetComponent<Slider>();
+        {
+            m_HealthSlider = GameObject.FindGameObjectWithTag("HealthSlider").GetComponent<Slider>();
+        }
 
         m_ExplosionParticles.gameObject.SetActive(false);
     }
@@ -43,16 +49,26 @@ public class TankHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        m_CurrentHealth = m_StartingHealth;
-        m_Dead = false;
+        if (tag == "Player")
+        {
+            m_CurrentHealth = m_PlayerStartingHealth;
+        }
+        else
+        {
+            m_CurrentHealth = m_StartingHealth;
+        }
 
+        m_Dead = false;
         SetHealthUI();
     }
-    
+
 
     public void TakeDamage(float amount)
     {
-        // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
+        /* 
+         * Adjust the tank's current health, update the UI based on the 
+         * new health and check whether or not the tank is dead.
+         */
         m_CurrentHealth -= amount;
         SetHealthUI();
 
@@ -60,17 +76,16 @@ public class TankHealth : MonoBehaviour
         {
             OnDeath();
         }
-
     }
 
 
     private void SetHealthUI()
     {
         // Adjust the value and colour of the slider.
-        
+
         if (gameObject.tag == "Player")
         {
-            m_MySlider.value = m_CurrentHealth;
+            m_HealthSlider.value = m_CurrentHealth;
         }
         else
         {
@@ -78,7 +93,7 @@ public class TankHealth : MonoBehaviour
             m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
         }
     }
-    
+
 
     private void OnDeath()
     {
@@ -91,3 +106,4 @@ public class TankHealth : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
+

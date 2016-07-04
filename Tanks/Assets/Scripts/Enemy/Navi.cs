@@ -33,7 +33,7 @@ public class Navi : MonoBehaviour {
 
             if (PlayerTransform)
             {
-                Debug.Log("player Position");
+                //Debug.Log("player Position");
                 nav.SetDestination(PlayerTransform.position);
                 return;
             }

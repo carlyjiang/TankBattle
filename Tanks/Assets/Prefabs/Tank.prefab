@@ -797,9 +797,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119664}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 3
-  m_AngularDrag: 2
+  m_Mass: 10
+  m_Drag: 10
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1179,6 +1179,7 @@ MonoBehaviour:
   m_SpecialWeapon: 0
   m_SpecialWeaponCount: 0
   m_ShellIndicatorImage: {fileID: 0}
+  m_ShellLeft: {fileID: 0}
 --- !u!114 &11456448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1218,6 +1219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_StartingHealth: 100
+  m_PlayerStartingHealth: 500
   m_Slider: {fileID: 11418168}
   m_FillImage: {fileID: 11427558}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
