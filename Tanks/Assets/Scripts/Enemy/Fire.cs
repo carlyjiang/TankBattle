@@ -20,24 +20,27 @@ public class Fire : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 
-	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		Collider[] c = Physics.OverlapSphere(transform.position, 15, m_TankMask);
 
-		for (int i = 0; i< c.Length; i++){
-			
+		for (int i = 0; i< c.Length; i++)
+        {	
 			Transform PlayerTransform = c[i].GetComponent<Transform> ();
 
-			if (!PlayerTransform) {
+			if (!PlayerTransform)
+            {
 				continue;
 			}
 
-			if (!isFired && Time.time > nextFire ) {
+			if (!isFired && Time.time > nextFire )
+            {
 				nextFire = Time.time + fireRate;
 				Fight ();
 			}
@@ -45,8 +48,8 @@ public class Fire : MonoBehaviour {
 	}
 
 
-	private void Fight(){
-
+	private void Fight()
+    {
 		isFired = true;
 		
 		Rigidbody shellInstance =

@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class FrozenField : MonoBehaviour {
-    public float m_MaxLifeTime = 30f;
+    public float m_MaxLifeTime;
     private float startTime;
-    public float m_ExplosionRadius = 10f;
-	public float EnemyMaxSpeed = 4f;
+    public float m_ExplosionRadius;
+    public float EnemyMaxSpeed;
 
 
     // Use this for initialization

@@ -43,8 +43,7 @@ public class TankShooting : MonoBehaviour
         m_AimCrossOriginalPositionOffset = new Vector3(
             0f,
             m_AimSlider.gameObject.transform.position.y - m_AimCross.gameObject.transform.position.y,
-            0f
-            );
+            0f);
     }
 
 
@@ -65,12 +64,7 @@ public class TankShooting : MonoBehaviour
 
         changeShootButtonColor();
 
-        if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired)
-        {
-            m_CurrentLaunchForce = m_MaxLaunchForce;
-            Fire();
-        }
-        else if (Input.GetButtonDown(m_FireButton) || shootButton.isKeyDown())
+        if (Input.GetButtonDown(m_FireButton) || shootButton.isKeyDown())
         {
             m_Fired = false;
             m_CurrentLaunchForce = m_MinLaunchForce;
@@ -80,9 +74,9 @@ public class TankShooting : MonoBehaviour
         }
         else if ((Input.GetButton(m_FireButton) || shootButton.IsPressing()) && !m_Fired)
         {
-            m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
+            if (m_CurrentLaunchForce <= m_MaxLaunchForce)
+                m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
 
-            //m_AimSlider.value = m_CurrentLaunchForce;
             m_AimCross.gameObject.transform.position += new Vector3(0f, 0.04f * (m_CurrentLaunchForce - m_MinLaunchForce), 0f);
         }
         else if ((Input.GetButtonUp(m_FireButton) || shootButton.isKeyUp()) && !m_Fired)

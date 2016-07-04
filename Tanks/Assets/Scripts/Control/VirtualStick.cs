@@ -9,6 +9,8 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     private Image joystickImg;
     private Vector3 inputVector;
 
+    private float inertial = 0.5f;
+
     private void Start()
     {
         bgImage = GetComponent<Image>();
@@ -32,8 +34,8 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
                 pos.y = 0;
             }
 
-            inputVector = new Vector3(Mathf.Pow(pos.x*2, 3) * 0.5f, 0, Mathf.Pow(pos.y * 2, 3));
-            inputVector.z = (inputVector.z < 0f ? inputVector.z * 0.3f : inputVector.z);
+            inputVector = new Vector3(pos.x*2, 0, pos.y*2);
+            inputVector.z = (inputVector.z < 0f ? inputVector.z * 0.7f : inputVector.z);
 
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
@@ -63,18 +65,10 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     {
         if (inputVector.x != 0)
         {
-            //return inputVector.x;
-            
-            if (inputVector.z >= 0f)
-                return inputVector.x;
-            else
-                return -inputVector.x;
-                
+            return inputVector.x * inertial;                
         }
         else
-        {
-            //return Input.GetAxis("Horizontal1");
-            
+        {   
             if (Input.GetAxis("Vertical1") >= 0.0)
             {
                 return Input.GetAxis("Horizontal1");
@@ -90,7 +84,7 @@ public class VirtualStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     public float Vertical()
     {
         if (inputVector.z != 0)
-            return inputVector.z;
+            return inputVector.z * inertial;
         else
             return Input.GetAxis("Vertical1");
     }

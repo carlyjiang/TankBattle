@@ -9,6 +9,7 @@ TagManager:
   - ShootButton
   - CannonWeaponBonus
   - FrozenWeaponBonus
+  - Flag
   layers:
   - Default
   - TransparentFX
