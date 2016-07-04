@@ -115,7 +115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 68643135}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -100, y: 230}
@@ -260,6 +260,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 821993329}
+  - {fileID: 889136702}
   - {fileID: 569901504}
   - {fileID: 541434176}
   - {fileID: 219278631}
@@ -353,7 +354,7 @@ GameObject:
   - 222: {fileID: 219278634}
   - 114: {fileID: 219278633}
   m_Layer: 0
-  m_Name: Reload
+  m_Name: ReloadText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,7 +372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 68643135}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 45, y: -50}
@@ -426,7 +427,7 @@ GameObject:
   - 224: {fileID: 229872445}
   - 114: {fileID: 229872446}
   m_Layer: 0
-  m_Name: Reload
+  m_Name: ReloadSlider
   m_TagString: Reload
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,7 +447,7 @@ RectTransform:
   - {fileID: 156099696}
   - {fileID: 1429615973}
   m_Father: {fileID: 68643135}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 150, y: -50}
@@ -733,7 +734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 68643135}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -100, y: 100}
@@ -855,7 +856,7 @@ GameObject:
   - 224: {fileID: 541434176}
   - 114: {fileID: 541434177}
   m_Layer: 0
-  m_Name: Health
+  m_Name: HealthSlider
   m_TagString: HealthSlider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -875,7 +876,7 @@ RectTransform:
   - {fileID: 1252131124}
   - {fileID: 1503899391}
   m_Father: {fileID: 68643135}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 150, y: -30}
@@ -973,6 +974,7 @@ MonoBehaviour:
   Enemy: {fileID: 176758, guid: ccc95c0ce7237427c849f7b98044840f, type: 2}
   spawnRate: 25
   spawnRateDelay: 8
+  m_SurviveTime: {fileID: 889136704}
   spawnEnemies: 1
   m_EnemyStartSpawnTime: 8
   m_FrozenBonus:
@@ -1079,7 +1081,7 @@ GameObject:
   - 222: {fileID: 569901507}
   - 114: {fileID: 569901506}
   m_Layer: 0
-  m_Name: Health
+  m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1097,7 +1099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 68643135}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 45, y: -30}
@@ -1459,6 +1461,95 @@ MonoBehaviour:
   m_EffectColor: {r: 0.4509804, g: 0.2784314, b: 0.15686275, a: 0.5}
   m_EffectDistance: {x: -3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!1 &889136701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 889136702}
+  - 222: {fileID: 889136705}
+  - 114: {fileID: 889136704}
+  - 114: {fileID: 889136703}
+  m_Layer: 0
+  m_Name: SurviveTime
+  m_TagString: SurviveTime
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &889136702
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889136701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 68643135}
+  m_RootOrder: 1
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -40}
+  m_SizeDelta: {x: 644, y: 478}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &889136703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889136701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.4509804, g: 0.2784314, b: 0.15686275, a: 0.5}
+  m_EffectDistance: {x: -3, y: -3}
+  m_UseGraphicAlpha: 1
+--- !u!114 &889136704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889136701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 3d7fe0a26ba72d949874021dc3d6995e, type: 3}
+    m_FontSize: 30
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 60
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Survive Time
+--- !u!222 &889136705
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889136701}
 --- !u!1001 &928495474
 Prefab:
   m_ObjectHideFlags: 0
@@ -1945,7 +2036,7 @@ RectTransform:
   m_Children:
   - {fileID: 410834751}
   m_Father: {fileID: 68643135}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 150, y: 150}

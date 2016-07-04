@@ -12,6 +12,7 @@ TagManager:
   - Flag
   - Reload
   - ShellCount
+  - SurviveTime
   layers:
   - Default
   - TransparentFX

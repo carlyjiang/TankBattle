@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 	public GameObject Enemy;
 	public float spawnRate;
     public float spawnRateDelay;
+    public Text m_SurviveTime;                  
+
 
     public bool spawnEnemies;                   // debug only, release version must be set to true
     private List<GameObject> m_Enemies = new List<GameObject>();
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     public float m_EnemyStartSpawnTime;
 
     private float m_StartTime;
+    private Boolean m_IsStart;
 
     public FrozenWeaponBonus[] m_FrozenBonus;
     public CannonWeaponBonus[] m_CannonBonus;
@@ -49,6 +52,8 @@ public class GameManager : MonoBehaviour
         nextSpawn1 = 0;
         nextSpawn2 = 0;
 
+        m_IsStart = false;
+
         // Once the tanks have been created and the camera is using them as targets, start the game.
         StartCoroutine(GameLoop());
 	}
@@ -56,6 +61,11 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
     {
+        if (m_IsStart)
+        {
+            m_SurviveTime.text = "Survive: " + Convert.ToString((int)Time.time - (int)m_StartTime) + "s";
+        }
+
         if (spawnEnemies && Time.time - m_StartTime > m_EnemyStartSpawnTime)
         {
             if (Time.time > nextSpawn1)
@@ -119,6 +129,7 @@ public class GameManager : MonoBehaviour
         m_CameraControl.m_Targets = targets;
     }
 
+
     // This is called from start and will run each phase of the game one after another.
     private IEnumerator GameLoop()
     {
@@ -145,9 +156,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     private IEnumerator RoundStarting()
     {
-        m_StartTime = Time.time;
+        
         // As soon as the round starts reset the tanks and make sure they can't move.
         ResetAllTanks();
         DisableTankControl();
@@ -163,8 +175,12 @@ public class GameManager : MonoBehaviour
         yield return m_StartWait;
     }
 
+
     private IEnumerator RoundPlaying()
     {
+        m_StartTime = Time.time;
+        m_IsStart = true;
+
         // As soon as the round begins playing let the players control the tanks.
         EnableTankControl();
 
@@ -181,6 +197,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RoundEnding()
     {
+        m_IsStart = false;
+
         // Stop tanks from moving.
         DisableTankControl();
 
