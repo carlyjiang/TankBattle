@@ -38,11 +38,14 @@ public class TankShooting : MonoBehaviour
     private float m_ReloadTime = 2f;
     private float m_ShootingTime;
 
+
     private void OnEnable()
     {
         // When the tank is turned on, reset the launch force and the UI
         m_CurrentLaunchForce = m_MinLaunchForce;
         m_AimSlider.value = m_MinLaunchForce;
+        m_Fired = false;
+
         m_AimCrossOriginalPositionOffset = new Vector3(
             0f,
             m_AimSlider.gameObject.transform.position.y - m_AimCross.gameObject.transform.position.y,

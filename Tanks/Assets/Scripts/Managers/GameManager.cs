@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GameManager : MonoBehaviour
 {
     public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
@@ -18,11 +19,10 @@ public class GameManager : MonoBehaviour
     public float spawnRateDelay;
     public Text m_SurviveTime;                  
 
-
     public bool spawnEnemies;                   // debug only, release version must be set to true
     private List<GameObject> m_Enemies = new List<GameObject>();
 
-	private float nextSpawn1;
+    private float nextSpawn1;
 	private float nextSpawn2;
     private int m_RoundNumber;                  // Which round the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -198,6 +198,13 @@ public class GameManager : MonoBehaviour
     private IEnumerator RoundEnding()
     {
         m_IsStart = false;
+        m_SurviveTime.text = "";
+        Text t = GameObject.FindGameObjectWithTag("ShellCount").GetComponent<Text>();
+        if (t)
+        {
+            t.text = "";
+        }
+
 
         // Stop tanks from moving.
         DisableTankControl();
