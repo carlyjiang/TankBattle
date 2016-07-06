@@ -46,3 +46,4 @@ public class Navi : MonoBehaviour {
         nav.SetDestination(m_Flag.transform.position);
     }
 }
+

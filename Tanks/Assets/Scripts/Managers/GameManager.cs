@@ -193,6 +193,8 @@ public class GameManager : MonoBehaviour
             // ... return on the next frame.
             yield return null;
         }
+
+        Application.LoadLevel(Application.loadedLevel);
     }
 
     private IEnumerator RoundEnding()
