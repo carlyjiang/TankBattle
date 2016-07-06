@@ -6,12 +6,14 @@ public class Navi : MonoBehaviour {
 	GameObject player;
     public LayerMask m_TankMask;
     public GameObject m_Flag;
+    public GameObject m_TargetArrow;
 
     // Use this for initialization
     void Awake () 
     {
 		findPlayer();
-		nav = GetComponent<NavMeshAgent> ();
+		nav = GetComponent<NavMeshAgent>();
+        m_TargetArrow.SetActive(false);
 
         m_Flag = GameObject.FindGameObjectWithTag("Flag");
 	}
@@ -34,11 +36,13 @@ public class Navi : MonoBehaviour {
             if (PlayerTransform)
             {
                 //Debug.Log("player Position");
+                m_TargetArrow.SetActive(true);
                 nav.SetDestination(PlayerTransform.position);
                 return;
             }
         }
-        
+
+        m_TargetArrow.SetActive(false);
         nav.SetDestination(m_Flag.transform.position);
     }
 }
