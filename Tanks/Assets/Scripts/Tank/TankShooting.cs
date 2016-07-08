@@ -9,6 +9,7 @@ public class TankShooting : MonoBehaviour
     public Rigidbody m_Shell;                   // Prefab of the normal shell.
     public Rigidbody m_FrozonShell;             // Prefab of the frozen shell.
     public Rigidbody m_CannonShell;             // Prefab of the cannon shell.
+	public Rigidbody m_FakeTank;				// Prefab of the faketank
     public GameObject m_Field;
     public static List<Vector3> m_FieldPositions = new List<Vector3>();
     public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
@@ -21,7 +22,7 @@ public class TankShooting : MonoBehaviour
     public float m_MaxChargeTime = 0.75f;       // How long the shell can charge for before it is fired at max force.
     public GameObject m_AimCross;
 
-    public int m_SpecialWeapon;                 // 0 for none, 1 for cannon shell, 2 for frozen shell
+    public int m_SpecialWeapon;                 // 0 for none, 1 for cannon shell, 2 for frozen shell, 3 for faketank
     public int m_SpecialWeaponCount = 0;
     public Image m_ShellIndicatorImage;
 
@@ -145,6 +146,12 @@ public class TankShooting : MonoBehaviour
             m_SpecialWeaponCount--;
             m_ReloadTime = 2f;
         }
+		else if (m_SpecialWeapon == 3 && m_SpecialWeaponCount > 0)
+		{
+			shellInstance = Instantiate(m_FakeTank, m_FireTransform.position + new Vector3(0f, -1.5f, 2f), m_FireTransform.rotation) as Rigidbody;
+			m_SpecialWeaponCount--;
+			m_ReloadTime = 1f;
+		}
         else
         {
             shellInstance = Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;

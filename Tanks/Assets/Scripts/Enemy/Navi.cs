@@ -6,16 +6,15 @@ public class Navi : MonoBehaviour {
 	GameObject player;
     public LayerMask m_TankMask;
     public GameObject m_Flag;
-    public GameObject m_TargetArrow;
+	public GameObject m_TargetArrow;
 
     // Use this for initialization
     void Awake () 
     {
 		findPlayer();
-		nav = GetComponent<NavMeshAgent>();
-        m_TargetArrow.SetActive(false);
+		nav = GetComponent<NavMeshAgent> ();
 
-        m_Flag = GameObject.FindGameObjectWithTag("Flag");
+        //m_Flag = GameObject.FindGameObjectWithTag("Flag");
 	}
 
 	void findPlayer()
@@ -25,7 +24,8 @@ public class Navi : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-		//nav.speed = 4;
+        //nav.speed = 4;
+        m_Flag = GameObject.FindGameObjectWithTag("Flag");
 
         Collider[] c = Physics.OverlapSphere(transform.position, 30, m_TankMask);        
 
@@ -36,14 +36,13 @@ public class Navi : MonoBehaviour {
             if (PlayerTransform)
             {
                 //Debug.Log("player Position");
-                m_TargetArrow.SetActive(true);
                 nav.SetDestination(PlayerTransform.position);
+				m_TargetArrow.SetActive (true);
                 return;
             }
         }
-
-        m_TargetArrow.SetActive(false);
+        
+		m_TargetArrow.SetActive (false);
         nav.SetDestination(m_Flag.transform.position);
     }
 }
-

@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
     public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
-	public GameObject Enemy;
+	public GameObject Enemy1;
+	public GameObject Enemy2;
 	public float spawnRate;
     public float spawnRateDelay;
     public Text m_SurviveTime;                  
@@ -72,14 +73,14 @@ public class GameManager : MonoBehaviour
             {
 			    nextSpawn1 = Time.time + spawnRate - ((Time.time - m_StartTime) / 10);
 				Vector3 ve1 = new Vector3 (20F, 0F, 20F);
-                SpawnEnemy(ve1);
+                SpawnEnemy1(ve1);
             }
 
             if (Time.time > nextSpawn2)
             {
                 nextSpawn2 = Time.time + spawnRate + spawnRateDelay - ((Time.time - m_StartTime) / 10);
                 Vector3 ve2 = new Vector3(-25F, 0F, -25F);
-                SpawnEnemy(ve2);
+                SpawnEnemy2(ve2);
             }
         }
 
@@ -107,10 +108,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-	private void SpawnEnemy(Vector3 ve)
+	private void SpawnEnemy1(Vector3 ve)
 	{
-		GameObject ob = Instantiate (Enemy, ve, Quaternion.identity) as GameObject;
-        m_Enemies.Add(ob);
+		GameObject ob1 = Instantiate (Enemy1, ve, Quaternion.identity) as GameObject;
+        m_Enemies.Add(ob1);
+	}
+
+	private void SpawnEnemy2(Vector3 ve)
+	{
+		GameObject ob2 = Instantiate (Enemy2, ve, Quaternion.identity) as GameObject;
+		m_Enemies.Add(ob2);
 	}
 
     private void SetCameraTargets()
@@ -193,8 +200,6 @@ public class GameManager : MonoBehaviour
             // ... return on the next frame.
             yield return null;
         }
-
-        Application.LoadLevel(Application.loadedLevel);
     }
 
     private IEnumerator RoundEnding()

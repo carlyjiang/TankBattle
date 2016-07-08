@@ -38,6 +38,13 @@ public class ShellExplosion : MonoBehaviour
             TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
 			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
 			HouseHealth house1 = targetRigidbody.GetComponent<HouseHealth>();
+			ET2Health enemy2 = targetRigidbody.GetComponent<ET2Health> ();
+
+
+			if (enemy2) {
+				float damege = CalculateDamage(targetRigidbody.position);
+				enemy2.TakeDamage(damege);	
+			}
 
             if (targetHealth) 
 			{
