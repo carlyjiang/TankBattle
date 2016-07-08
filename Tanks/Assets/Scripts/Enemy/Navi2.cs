@@ -3,17 +3,14 @@ using System.Collections;
 
 public class Navi2 : MonoBehaviour {
 	NavMeshAgent nav;
-	//GameObject player;
+
 	public LayerMask m_TankMask;
 	public GameObject m_Flag;
 	public GameObject m_TargetArrow;
 
 	// Use this for initialization
 	void Start () {
-		nav = GetComponent<NavMeshAgent> ();
-		//player = GameObject.FindGameObjectWithTag("Player");
-		m_Flag = GameObject.FindGameObjectWithTag("Flag");
-		nav.SetDestination (m_Flag.transform.position);
+		nav = GetComponent<NavMeshAgent> ();		
 	}
 	
 	// Update is called once per frame
@@ -28,14 +25,34 @@ public class Navi2 : MonoBehaviour {
 
 			if (PlayerTransform)
 			{
-				//Debug.Log("player Position");
 				nav.SetDestination(PlayerTransform.position);
-				m_TargetArrow.SetActive (true);
-				return;
+                ArrowCheckRange(c[i]);
+                
+                return;
 			}
 		}
 
 		m_TargetArrow.SetActive (false);
-		nav.SetDestination(m_Flag.transform.position);
+        if (m_Flag)
+        {
+            nav.SetDestination(m_Flag.transform.position);
+        }
 	}
+
+    void ArrowCheckRange(GameObject o)
+    {
+        if (o.tag != "Flag")
+            m_TargetArrow.SetActive(true);
+        else
+            m_TargetArrow.SetActive(false);
+    }
+
+    void ArrowCheckRange(Collider o)
+    {
+        if (o.tag != "Flag")
+            m_TargetArrow.SetActive(true);
+        else
+            m_TargetArrow.SetActive(false);
+    }
 }
+

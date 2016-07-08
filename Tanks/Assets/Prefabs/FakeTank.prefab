@@ -211,7 +211,8 @@ GameObject:
   - 4: {fileID: 438324}
   - 54: {fileID: 5428614}
   - 65: {fileID: 6524192}
-  - 114: {fileID: 11479448}
+  - 114: {fileID: 11426234}
+  - 114: {fileID: 11451080}
   m_Layer: 9
   m_Name: FakeTank
   m_TagString: Flag
@@ -269,7 +270,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.97, y: 0.27346402, z: -33.77484}
+  m_LocalPosition: {x: 10.4094925, y: 0.23145097, z: -24.827671}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -570,6 +571,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 3
+--- !u!114 &11426234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eda06178511847299326550852eab31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxLifeTime: 200
+  FakeTankPreb: {fileID: 195052}
 --- !u!114 &11439368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -619,6 +633,23 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11451080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f17bf738e1187fc439b13ead73a3fb0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHealth: 300
+  m_Slider: {fileID: 11425472}
+  m_FillImage: {fileID: 11425498}
+  m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
+  m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  m_ExplosionPrefab: {fileID: 151086, guid: ee49a9a8678ecf8468eb488e1ac8d42b, type: 2}
 --- !u!114 &11457484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,24 +677,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11479448
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8326b9dca06e5bc4885942c9371f51f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StartingHealth: 100
-  m_PlayerStartingHealth: 500
-  m_Slider: {fileID: 11425472}
-  m_FillImage: {fileID: 11425498}
-  m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
-  m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  m_ExplosionPrefab: {fileID: 151086, guid: ee49a9a8678ecf8468eb488e1ac8d42b, type: 2}
 --- !u!198 &19828966
 ParticleSystem:
   m_ObjectHideFlags: 1

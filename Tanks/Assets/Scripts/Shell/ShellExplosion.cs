@@ -39,9 +39,11 @@ public class ShellExplosion : MonoBehaviour
 			OilStorageHealth oilhealth = targetRigidbody.GetComponent<OilStorageHealth>();
 			HouseHealth house1 = targetRigidbody.GetComponent<HouseHealth>();
 			ET2Health enemy2 = targetRigidbody.GetComponent<ET2Health> ();
+            FakeTankHealth fake = targetRigidbody.GetComponent<FakeTankHealth>();
 
 
-			if (enemy2) {
+
+            if (enemy2) {
 				float damege = CalculateDamage(targetRigidbody.position);
 				enemy2.TakeDamage(damege);	
 			}
@@ -61,6 +63,11 @@ public class ShellExplosion : MonoBehaviour
                 //float damege = CalculateDamage(targetRigidbody.position);
                 house1.TakeDamage(10);
 			}
+            if (fake)
+            {
+                float damege = CalculateDamage(targetRigidbody.position);
+                fake.TakeDamage(damege);
+            }
         }
 
         // Unparent the particles from the shell.

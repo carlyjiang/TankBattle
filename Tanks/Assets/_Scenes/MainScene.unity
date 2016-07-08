@@ -976,13 +976,15 @@ MonoBehaviour:
   spawnRate: 25
   spawnRateDelay: 8
   m_SurviveTime: {fileID: 889136704}
-  spawnEnemies: 1
+  spawnEnemies: 0
   m_EnemyStartSpawnTime: 8
   m_FrozenBonus:
   - {fileID: 310468257}
   m_CannonBonus:
   - {fileID: 777540386}
   - {fileID: 1440160497}
+  m_FakeTankWeaponBonus:
+  - {fileID: 595272089}
 --- !u!4 &563313709
 Transform:
   m_ObjectHideFlags: 0
@@ -1145,6 +1147,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 569901503}
+--- !u!114 &595272089 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11457756, guid: 33d80004307814683bf15512bfc20627,
+    type: 2}
+  m_PrefabInternal: {fileID: 1874401529}
+  m_Script: {fileID: 11500000, guid: bf096fcc17c714eefa6b1574a3aec0e2, type: 3}
 --- !u!1 &636914929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +1985,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 498540, guid: 33d80004307814683bf15512bfc20627, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.65999997
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 498540, guid: 33d80004307814683bf15512bfc20627, type: 2}
       propertyPath: m_LocalPosition.z

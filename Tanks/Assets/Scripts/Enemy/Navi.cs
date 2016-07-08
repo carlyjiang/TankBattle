@@ -13,8 +13,6 @@ public class Navi : MonoBehaviour {
     {
 		findPlayer();
 		nav = GetComponent<NavMeshAgent> ();
-
-        //m_Flag = GameObject.FindGameObjectWithTag("Flag");
 	}
 
 	void findPlayer()
@@ -35,14 +33,33 @@ public class Navi : MonoBehaviour {
 
             if (PlayerTransform)
             {
-                //Debug.Log("player Position");
                 nav.SetDestination(PlayerTransform.position);
-				m_TargetArrow.SetActive (true);
+                ArrowCheckRange(c[i]);
                 return;
             }
         }
         
 		m_TargetArrow.SetActive (false);
-        nav.SetDestination(m_Flag.transform.position);
+        if (m_Flag)
+        {
+            nav.SetDestination(m_Flag.transform.position);
+        }
+    }
+
+    void ArrowCheckRange(GameObject o)
+    {
+        if (o.tag != "Flag")
+            m_TargetArrow.SetActive(true);
+        else
+            m_TargetArrow.SetActive(false);
+    }
+
+    void ArrowCheckRange(Collider o)
+    {
+        if (o.tag != "Flag")
+            m_TargetArrow.SetActive(true);
+        else
+            m_TargetArrow.SetActive(false);
     }
 }
+

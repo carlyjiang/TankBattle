@@ -120,6 +120,10 @@ public class TankShooting : MonoBehaviour
         {
             m_ShellIndicatorImage.color = Color.red;
         }
+        else if (m_SpecialWeapon == 3)
+        {
+            m_ShellIndicatorImage.color = Color.cyan;
+        }
         else
         {
             m_ShellIndicatorImage.color = Color.yellow;
@@ -148,7 +152,7 @@ public class TankShooting : MonoBehaviour
         }
 		else if (m_SpecialWeapon == 3 && m_SpecialWeaponCount > 0)
 		{
-			shellInstance = Instantiate(m_FakeTank, m_FireTransform.position + new Vector3(0f, -1.5f, 2f), m_FireTransform.rotation) as Rigidbody;
+			shellInstance = Instantiate(m_FakeTank, m_FireTransform.position + new Vector3(0f, -1.5f, 2f), new Quaternion(0f, 0f, 0f, 0f)) as Rigidbody;
 			m_SpecialWeaponCount--;
 			m_ReloadTime = 1f;
 		}

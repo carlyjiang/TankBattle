@@ -21,8 +21,8 @@ public class FakeTankWeaponBonus : MonoBehaviour {
 
 	public void RandomSpawn()
 	{
-		//Debug.Log(isActive);
-		//Debug.Log(Time.time - lastTime);
+		Debug.Log(isActive);
+		Debug.Log(Time.time - lastTime);
 
 		if (!isActive && Time.time - lastTime > m_RenewInterval + Random.Range(1, 5))
 		{
@@ -37,6 +37,7 @@ public class FakeTankWeaponBonus : MonoBehaviour {
 		if (other.gameObject.CompareTag("Player"))
 		{
 			this.gameObject.SetActive(false);
+            isActive = false;
 
 			TankShooting ts = other.GetComponent<TankShooting>();
 			ts.m_SpecialWeapon = 3;

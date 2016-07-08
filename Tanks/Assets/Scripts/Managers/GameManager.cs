@@ -38,7 +38,8 @@ public class GameManager : MonoBehaviour
 
     public FrozenWeaponBonus[] m_FrozenBonus;
     public CannonWeaponBonus[] m_CannonBonus;
-    
+    public FakeTankWeaponBonus[] m_FakeTankWeaponBonus;
+
 
     private void Start()
     {
@@ -93,7 +94,12 @@ public class GameManager : MonoBehaviour
         {
             g.RandomSpawn();
         }
-	}
+
+        foreach (FakeTankWeaponBonus g in m_FakeTankWeaponBonus)
+        {
+            g.RandomSpawn();
+        }
+    }
 
     private void SpawnAllTanks()
     {
